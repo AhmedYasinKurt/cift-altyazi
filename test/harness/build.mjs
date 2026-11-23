@@ -12,6 +12,8 @@ const userscript = fs.readFileSync(path.join(root, 'cift-altyazi.user.js'), 'utf
 const args = process.argv.slice(2);
 const mock = args.includes('--mock');
 const desktop = args.includes('--desktop');
+// --mock-tr: Google çevirisi yerine sahte çeviri ("[TR] satır"), IP engeli varken bağlantıyı test etmek için.
+const mockTr = args.includes('--mock-tr');
 const UA = desktop
   ? 'Mozilla/5.0 (X11; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0'
   : 'Mozilla/5.0 (Android 14; Tablet; rv:145.0) Gecko/145.0 Firefox/145.0';
@@ -77,6 +79,17 @@ const setup = `async (page) => {
     globalThis.__mocked = (globalThis.__mocked || 0) + 1;
     return route.fulfill({ status: 200, contentType: 'application/json', path: file });
   });` : ''}
+  ${mockTr ? `await ctx.route('**/translate_a/single**', async (route) => {
+    const req = route.request();
+    const u = new URL(req.url());
+    let q = u.searchParams.get('q');
+    if (q == null) q = new URLSearchParams(req.postData() || '').get('q') || '';
+    const NL = String.fromCharCode(10);
+    const lines = q.split(NL);
+    const segs = lines.map((l, i) => ['[TR] ' + l + (i < lines.length - 1 ? NL : ''), l]);
+    globalThis.__trMocked = (globalThis.__trMocked || 0) + 1;
+    return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify([segs, null, 'en']) });
+  });` : ''}
   const p = await ctx.newPage();
   const errors = [];
   p.on('console', (m) => { if (m.type() === 'error' && /cift|Trusted|Content Security|CSP/i.test(m.text())) errors.push(m.text().slice(0, 300)); });
@@ -93,4 +106,4 @@ const setup = `async (page) => {
 fs.mkdirSync(path.join(here, 'out'), { recursive: true });
 fs.writeFileSync(path.join(here, 'out', 'setup.js'), setup);
 fs.writeFileSync(injectedPath, injected);
-console.log('yazıldı: test/harness/out/setup.js (' + videoId + ' @ ' + host + (mock ? ', mock' : '') + (desktop ? ', masaüstü' : '') + ')');
+console.log('yazıldı: test/harness/out/setup.js (' + videoId + ' @ ' + host + (mock ? ', mock' : '') + (desktop ? ', masaüstü' : '') + (mockTr ? ', sahte çeviri' : '') + ')');

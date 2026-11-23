@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Çift Altyazı
 // @namespace    cift-altyazi
-// @version      0.2.1
+// @version      0.3.0
 // @description  YouTube'da İngilizce altyazı + Türkçe çeviri (sürekli ya da TR tuşuyla gerektiğinde)
 // @match        *://*.youtube.com/*
 // @inject-into  content
@@ -34,7 +34,7 @@
     sizePct: { min: 60, max: 200, step: 10 },
     bgPct: { min: 0, max: 100, step: 10 },
   });
-  const VERSION = '0.2.1'; // @version ile aynı tutun
+  const VERSION = '0.3.0'; // @version ile aynı tutun
 
   /** json3 altyazı metnini satırlara çevirir: [{ start, end, text }] (ms). */
   function parseJson3(text) {
@@ -78,6 +78,68 @@
     while (from > 0 && from > i - maxBack && !SENTENCE_END.test(cues[from - 1].text)) from--;
     while (to < cues.length - 1 && to < i + maxFwd && !SENTENCE_END.test(cues[to].text)) to++;
     return [from, to];
+  }
+
+  /**
+   * Altyazı parçalarını tam cümlelere birleştirir (sürekli modda kullanılır).
+   * Bir parçada cümle bitip yenisi başlıyorsa parça bölünür; zaman, parçanın içindeki
+   * harf konumuna göre orantılanır. Noktalama yoksa maxChars'ta ya da 4 sn'den uzun
+   * sessizlikte kesilir. "(Laughter)" gibi parantezli satırlar tek başına kalır.
+   * Dönen dizi Cue biçimindedir: [{ start, end, text }], sıralı ve üst üste binmez.
+   */
+  function buildSentences(cues, maxChars = 220) {
+    const GAP = 4000, LINGER = 1500;
+    const BOUNDARY = /[.?!…。！？]+["'”’)\]]*(?=\s|$)/g;
+    const out = [];
+    let acc = null; // { start, end, text }
+    const flush = () => {
+      if (acc && acc.text.trim()) out.push({ start: acc.start, end: acc.end, text: acc.text.trim() });
+      acc = null;
+    };
+    for (let k = 0; k < cues.length; k++) {
+      const c = cues[k];
+      const next = cues[k + 1];
+      // Otomatik altyazıda parçalar zamanca üst üste biner: bir sonraki başlayınca bu bitmiş say.
+      const effEnd = next && next.start > c.start && next.start < c.end ? next.start : c.end;
+      const dur = Math.max(1, effEnd - c.start);
+      const len = Math.max(1, c.text.length);
+      const at = (idx) => Math.round(c.start + (idx / len) * dur);
+      if (acc && c.start - acc.end > GAP) flush();
+      if (/^[\[(].*[\])]$/.test(c.text.trim())) { // (Laughter), [Music] …
+        flush();
+        out.push({ start: c.start, end: effEnd, text: c.text.trim() });
+        continue;
+      }
+      // Parçayı cümle sonlarından böl.
+      const pieces = [];
+      let from = 0, m;
+      BOUNDARY.lastIndex = 0;
+      while ((m = BOUNDARY.exec(c.text)) !== null) {
+        const to = m.index + m[0].length;
+        pieces.push({ from, to, ends: true });
+        from = to;
+      }
+      if (from < c.text.length) pieces.push({ from, to: c.text.length, ends: false });
+      for (const pc of pieces) {
+        const raw = c.text.slice(pc.from, pc.to);
+        const text = raw.trim();
+        if (!text) continue;
+        const lead = raw.length - raw.trimStart().length;
+        const start = at(pc.from + lead);
+        const end = at(pc.to);
+        if (!acc) acc = { start, end, text };
+        else { acc.text += ' ' + text; acc.end = end; }
+        if (pc.ends || acc.text.length >= maxChars) flush();
+      }
+    }
+    flush();
+    // Okumaya zaman tanı: bitişten sonra en çok LINGER kadar kal, ama sonrakine binme.
+    for (let i = 0; i < out.length; i++) {
+      const nextStart = i + 1 < out.length ? out[i + 1].start : Infinity;
+      out[i].end = Math.min(nextStart, Math.max(out[i].end, out[i].start + 1) + LINGER);
+      if (out[i].end <= out[i].start) out[i].end = out[i].start + 1;
+    }
+    return out;
   }
 
   /** Satırları '\n' ile birleşince maxChars'ı aşmayan parçalara böler: [[from, toExclusive], ...]. */
@@ -164,7 +226,7 @@
   const CA = {
     parseJson3, findLastCueIndex, findActiveCueIndex, sentenceRange, chunkLines,
     parseTranslateResponse, splitTranslated, chooseSourceTrack, parseTimedtextUrl, normalizeSettings,
-    stepSetting,
+    stepSetting, buildSentences,
   };
 
   if (typeof module === 'object' && module && module.exports) {
@@ -392,7 +454,8 @@
 
     // --- Durum ---------------------------------------------------------------
     const captionStore = new Map(); // videoId -> Map("lang|kind" -> metin)
-    let cur = { videoId: '', lang: '', cues: [], tr: null, status: '', job: 0 };
+    // cues: YouTube'un altyazı parçaları; sents: sürekli mod için tam cümleler; tr: sents'in Türkçesi
+    let cur = { videoId: '', lang: '', cues: [], sents: [], tr: null, status: '', job: 0 };
     let od = { open: false, en: '', tr: '', range: null, session: 0 }; // gerektiğinde göster
     let bridgeReady = false;
 
@@ -417,7 +480,7 @@
 
     function onVideoStatus(d) {
       if (d.videoId !== cur.videoId) {
-        cur = { videoId: d.videoId, lang: '', cues: [], tr: null, status: '', job: cur.job + 1 };
+        cur = { videoId: d.videoId, lang: '', cues: [], sents: [], tr: null, status: '', job: cur.job + 1 };
         closeOnDemand(false);
       }
       cur.status = d.status;
@@ -426,6 +489,7 @@
         const cues = text ? parseJson3(text) : [];
         if (cues.length) {
           cur.cues = cues;
+          cur.sents = buildSentences(cues);
           cur.lang = d.lang;
           cur.tr = loadCachedTranslation(trKey()) || null;
           if (settings.trMode === 'always') startFullTranslation();
@@ -472,10 +536,10 @@
       return out;
     }
 
-    const trKey = () => 'tr:' + cur.videoId + ':' + cur.lang;
+    const trKey = () => 'trs:' + cur.videoId + ':' + cur.lang;
     function loadCachedTranslation(key) {
       const v = GM_getValue(key);
-      return Array.isArray(v) && v.length === cur.cues.length ? v : null;
+      return Array.isArray(v) && v.length === cur.sents.length ? v : null;
     }
     function saveCachedTranslation(key, arr) {
       GM_setValue(key, arr);
@@ -496,15 +560,15 @@
     }
 
     async function startFullTranslation() {
-      if (!cur.cues.length || cur.translating === cur.job) return;
+      if (!cur.sents.length || cur.translating === cur.job) return;
       if (cur.tr && cur.tr.every((x) => typeof x === 'string')) return;
       const job = cur.job;
       cur.translating = job;
-      const lines = cur.cues.map((c) => c.text);
+      const lines = cur.sents.map((c) => c.text);
       const tr = cur.tr && cur.tr.length === lines.length ? cur.tr.slice() : new Array(lines.length).fill(null);
       const chunks = chunkLines(lines);
       const v = getVideo();
-      const nowIdx = v ? Math.max(0, findLastCueIndex(cur.cues, v.currentTime * 1000)) : 0;
+      const nowIdx = v ? Math.max(0, findLastCueIndex(cur.sents, v.currentTime * 1000)) : 0;
       let first = chunks.findIndex(([f, t]) => nowIdx >= f && nowIdx < t);
       if (first < 0) first = 0;
       const order = chunks.slice(first).concat(chunks.slice(0, first));
@@ -544,9 +608,10 @@
       translateText(en).then((tr) => {
         if (od.open && od.session === session) { od.tr = tr; render(true); }
       }).catch(() => {
-        const cached = cur.tr && cur.tr.slice(range[0], range[1] + 1);
+        const j = findLastCueIndex(cur.sents, cur.cues[i].start);
+        const cached = cur.tr && j >= 0 && cur.tr[j];
         if (od.open && od.session === session) {
-          od.tr = cached && cached.every(Boolean) ? cached.join(' ') : 'Çeviri şu an alınamadı.';
+          od.tr = typeof cached === 'string' ? cached : 'Çeviri şu an alınamadı.';
           render(true);
         }
       });
@@ -655,9 +720,9 @@
       parts.push('Bağlantı: ' + (bridgeReady ? 'tamam' : 'YOK'));
       const statusTr = { ok: 'yüklendi', loading: 'yükleniyor', fail: 'yüklenemedi', none: 'videoda yok', turkish: 'video Türkçe' };
       parts.push('Altyazı: ' + (cur.cues.length ? cur.cues.length + ' satır (' + cur.lang + ')' : (statusTr[cur.status] || 'bekleniyor')));
-      if (settings.trMode === 'always' && cur.cues.length) {
+      if (settings.trMode === 'always' && cur.sents.length) {
         const done = cur.tr ? cur.tr.filter((x) => typeof x === 'string').length : 0;
-        parts.push('Çeviri: ' + done + '/' + cur.cues.length);
+        parts.push('Çeviri: ' + done + '/' + cur.sents.length + ' cümle');
       }
       const seen = debug.events.filter((e) => e.type === 'seen').length;
       parts.push('İstek: ' + seen);
@@ -723,10 +788,17 @@
         en = settings.showOriginal ? od.en : '';
         tr = od.tr;
       } else if (hasCues && v) {
-        const i = findActiveCueIndex(cur.cues, v.currentTime * 1000);
-        if (i >= 0) {
-          if (settings.showOriginal) en = cur.cues[i].text;
-          if (settings.trMode === 'always' && cur.tr && typeof cur.tr[i] === 'string') tr = cur.tr[i];
+        const t = v.currentTime * 1000;
+        if (settings.trMode === 'always') {
+          // Sürekli mod: iki satır da tam cümle
+          const i = findActiveCueIndex(cur.sents, t);
+          if (i >= 0) {
+            if (settings.showOriginal) en = cur.sents[i].text;
+            if (cur.tr && typeof cur.tr[i] === 'string') tr = cur.tr[i];
+          }
+        } else {
+          const i = findActiveCueIndex(cur.cues, t);
+          if (i >= 0 && settings.showOriginal) en = cur.cues[i].text;
         }
       }
       // Ayarlar açıkken ve o an konuşma yoksa örnek satır göster: boyut/koyuluk hemen görülsün.

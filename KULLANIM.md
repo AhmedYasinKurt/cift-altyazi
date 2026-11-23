@@ -73,7 +73,7 @@ Kurulum bitti! 🎉
 | Ayar | Seçenekler | Açıklama |
 | --- | --- | --- |
 | **İngilizce (orijinal) altyazı** | Açık / Kapalı | Videoda zaten yazı varsa ya da İngilizceye ihtiyacın yoksa **Kapalı** yap. |
-| **Türkçe çeviri** | Sürekli göster / Gerektiğinde göster | **Sürekli**: her cümlenin altında Türkçesi hep görünür. **Gerektiğinde**: sadece TR tuşuna basınca çıkar. |
+| **Türkçe çeviri** | Sürekli göster / Gerektiğinde göster | **Sürekli**: altyazı **tam cümleler** halinde gösterilir (YouTube parçaları birleştirilir), her cümlenin altında Türkçesi hep görünür. **Gerektiğinde**: İngilizce YouTube'daki gibi parça parça akar; Türkçe sadece TR tuşuna basınca, cümlenin tamamı için çıkar. |
 | **Altyazı boyutu** | `−` / `+` (%60 – %200) | Yazıyı küçültür / büyütür. Hem İngilizce hem Türkçe satıra uygulanır. |
 | **Arka plan koyuluğu** | `−` / `+` (%0 – %100) | Yazının arkasındaki siyah kutunun koyuluğu. **%0** = kutu yok (yazıya gölge eklenir, video daha çok görünür); **%100** = tam siyah. |
 
@@ -106,7 +106,7 @@ Bana yazarken bu satırı da söylersen sorunu hemen bulabilirim.
 | "**Çift Altyazı YouTube sayfasına bağlanamadı**" yazısı / durum satırında **Bağlantı: YOK** | Sayfayı yenile. Düzelmezse bana durum satırıyla birlikte haber ver (Firefox'un güvenlik kuralı engellemiş olabilir). |
 | "**Bu videoda altyazı yok**" | O videonun hiç altyazısı yok. Bu betik konuşmayı kendisi yazıya dökemez. Başka video dene. |
 | "**Altyazı yüklenemedi, tekrar deneniyor**" | Biraz bekle. Olmazsa videonun **CC** düğmesine bir kez bas. Hâlâ olmazsa sayfayı yenile. |
-| "**Çeviri şu an alınamadı**" | Ücretsiz Google çevirisi geçici olarak cevap vermedi (çok fazla istek olunca olabilir). Birkaç dakika sonra tekrar dene. |
+| "**Çeviri şu an alınamadı**" | Ücretsiz Google çevirisi geçici olarak cevap vermedi (çok fazla istek olunca olabilir). Birkaç dakika (bazen bir saat kadar) sonra tekrar dene. Betik bu sırada çalışmaya devam eder; İngilizce altyazı görünür. |
 | Altyazı geç geliyor | Videoyu oynatmadan YouTube altyazıyı indirmez. Oynat ve birkaç saniye bekle. |
 | Altyazılar iki kez görünüyor | Sayfayı yenile. |
 | Tuşlara basınca bir şey olmuyor | YouTube "uygulamayı aç" gibi bir pencere açmış olabilir; o pencerede **Şimdi değil** de. |
@@ -114,6 +114,13 @@ Bana yazarken bu satırı da söylersen sorunu hemen bulabilirim.
 ### Betik nasıl güncellenir?
 Violentmonkey betiği kendiliğinden günceller (günde bir kez kadar). Hemen güncellemek istersen:
 Firefox menüsü → **Eklentiler** → **Violentmonkey** → **Kontrol paneli (Dashboard)** → Çift Altyazı'nın yanındaki **güncelle** simgesi.
+
+### Yeni sürüm sorun çıkarırsa: eski sürüme dönmek
+Her sürüm GitHub'da saklanıyor (`v0.1.0`, `v0.2.0`, `v0.2.1`, `v0.3.0` …). Bana "eski sürüme dön" demen yeterli; ben geri alıp yüklerim, tablete kendiliğinden gelir.
+
+Kendin hemen denemek istersen: Firefox'ta şu linki aç ve **Yükle**'ye bas (sürüm numarasını değiştirebilirsin):
+`https://raw.githubusercontent.com/AhmedYasinKurt/cift-altyazi/v0.2.1/cift-altyazi.user.js`
+Not: Violentmonkey bir sonraki otomatik güncellemede yine en yeni sürüme geçer.
 
 ### Geçici olarak kapatmak / silmek
 Violentmonkey kontrol panelinde Çift Altyazı'nın yanındaki **anahtarla** kapatabilir, **çöp kutusu** ile silebilirsin.
