@@ -9,6 +9,7 @@
 // @noframes
 // @grant        GM_getValue
 // @grant        GM_setValue
+// @grant        GM_deleteValue
 // @grant        GM_xmlhttpRequest
 // @grant        GM_addStyle
 // @grant        GM_registerMenuCommand
@@ -231,7 +232,12 @@
       const have = captured.get(vid);
       if (have && have.has(src.languageCode + '|' + src.kind)) return report('ok', { lang: src.languageCode, kind: src.kind });
 
+      // Video hiç oynatılmadıysa oynatıcı altyazıyı indirmez; deneme harcama, bekle.
+      const v = mp.querySelector('video');
+      if (!v || (v.paused && v.currentTime === 0)) return;
+
       const now = Date.now();
+      if (state.attempts >= 3 && now - state.last > 20000) state.attempts = 2; // vazgeçme: yavaşça yeniden dene
       if (state.attempts < 3 && now - state.last > 4000) {
         state.attempts++;
         state.last = now;
@@ -319,34 +325,369 @@
     } catch (e) { return false; }
   }
 
-  main();
-
   function main() {
     const token = Math.random().toString(36).slice(2) + Date.now().toString(36);
-    const bridge = { ready: false, onCaptions: null, onVideo: null };
     const debug = (window.__ciftAltyaziDebug = { events: [] });
 
+    // --- Ayarlar -------------------------------------------------------------
+    let settings = normalizeSettings(GM_getValue('settings'));
+    function saveSettings(patch) {
+      settings = normalizeSettings(Object.assign({}, settings, patch));
+      GM_setValue('settings', settings);
+      if (settings.trMode === 'always') startFullTranslation();
+      if (settings.trMode !== 'onDemand') closeOnDemand(false);
+      render(true);
+      updatePanel();
+    }
+
+    // --- Durum ---------------------------------------------------------------
+    const captionStore = new Map(); // videoId -> Map("lang|kind" -> metin)
+    let cur = { videoId: '', lang: '', cues: [], tr: null, status: '', job: 0 };
+    let od = { open: false, en: '', tr: '', range: null, session: 0 }; // gerektiğinde göster
+    let bridgeReady = false;
+
+    // --- Sayfa parçası ile haberleşme ----------------------------------------
     window.addEventListener('message', (e) => {
       const d = e.data;
       if (!d || d.src !== 'cift-altyazi' || d.dir !== 'page' || d.token !== token) return;
       debug.events.push({ type: d.type, videoId: d.videoId, lang: d.lang, kind: d.kind, status: d.status, len: d.text ? d.text.length : 0 });
       if (d.type === 'ready') {
-        bridge.ready = true;
+        bridgeReady = true;
         sendToPage('resend');
-      } else if (d.type === 'captions' && bridge.onCaptions) bridge.onCaptions(d);
-      else if (d.type === 'video' && bridge.onVideo) bridge.onVideo(d);
+      } else if (d.type === 'captions') {
+        if (!captionStore.has(d.videoId)) captionStore.set(d.videoId, new Map());
+        captionStore.get(d.videoId).set(d.lang + '|' + d.kind, d.text);
+      } else if (d.type === 'video') {
+        onVideoStatus(d);
+      }
     });
-
     function sendToPage(type) {
       window.postMessage({ src: 'cift-altyazi', dir: 'content', token, type }, '*');
     }
 
+    function onVideoStatus(d) {
+      if (d.videoId !== cur.videoId) {
+        cur = { videoId: d.videoId, lang: '', cues: [], tr: null, status: '', job: cur.job + 1 };
+        closeOnDemand(false);
+      }
+      cur.status = d.status;
+      if (d.status === 'ok') {
+        const text = captionStore.has(d.videoId) && captionStore.get(d.videoId).get(d.lang + '|' + d.kind);
+        const cues = text ? parseJson3(text) : [];
+        if (cues.length) {
+          cur.cues = cues;
+          cur.lang = d.lang;
+          cur.tr = loadCachedTranslation(trKey()) || null;
+          if (settings.trMode === 'always') startFullTranslation();
+        } else {
+          sendToPage('retry');
+        }
+      } else if (d.status === 'none') {
+        showNote('Bu videoda altyazı yok.');
+      } else if (d.status === 'turkish') {
+        showNote('Bu video Türkçe, çeviriye gerek yok.');
+      } else if (d.status === 'fail' && !cur.failNoted) {
+        cur.failNoted = true; // her videoda bir kez söyle; arka planda denemeye devam ediliyor
+        showNote('Altyazı yüklenemedi, tekrar deneniyor. Olmazsa videodaki CC düğmesine bir kez basın.');
+      }
+      render(true);
+    }
+
+    // --- Çeviri ----------------------------------------------------------------
+    const TR_URL = 'https://translate.googleapis.com/translate_a/single?client=gtx&tl=tr&dt=t&sl=';
+    const textCache = new Map();
+
+    function gtx(text, sl) {
+      return new Promise((resolve, reject) => {
+        GM_xmlhttpRequest({
+          method: 'POST',
+          url: TR_URL + encodeURIComponent(sl || 'auto'),
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          data: 'q=' + encodeURIComponent(text),
+          timeout: 15000,
+          onload: (r) => {
+            if (r.status !== 200) return reject(new Error('HTTP ' + r.status));
+            try { resolve(parseTranslateResponse(JSON.parse(r.responseText))); } catch (e) { reject(e); }
+          },
+          onerror: () => reject(new Error('ağ hatası')),
+          ontimeout: () => reject(new Error('zaman aşımı')),
+        });
+      });
+    }
+
+    async function translateText(text) {
+      if (textCache.has(text)) return textCache.get(text);
+      const out = (await gtx(text, baseLang(cur.lang))).replace(/\s*\n\s*/g, ' ').trim();
+      textCache.set(text, out);
+      return out;
+    }
+
+    const trKey = () => 'tr:' + cur.videoId + ':' + cur.lang;
+    function loadCachedTranslation(key) {
+      const v = GM_getValue(key);
+      return Array.isArray(v) && v.length === cur.cues.length ? v : null;
+    }
+    function saveCachedTranslation(key, arr) {
+      GM_setValue(key, arr);
+      const index = (GM_getValue('trIndex') || []).filter((k) => k !== key);
+      index.push(key);
+      while (index.length > 20) GM_deleteValue(index.shift());
+      GM_setValue('trIndex', index);
+    }
+
+    async function translateRange(lines, from, to, sl) {
+      const text = lines.slice(from, to).join('\n');
+      const res = await gtx(text, sl);
+      const parts = splitTranslated(res, to - from);
+      if (parts) return parts;
+      if (to - from === 1) return [res.replace(/\s*\n\s*/g, ' ').trim()];
+      const mid = from + ((to - from) >> 1);
+      return (await translateRange(lines, from, mid, sl)).concat(await translateRange(lines, mid, to, sl));
+    }
+
+    async function startFullTranslation() {
+      if (!cur.cues.length || cur.translating === cur.job) return;
+      if (cur.tr && cur.tr.every((x) => typeof x === 'string')) return;
+      const job = cur.job;
+      cur.translating = job;
+      const lines = cur.cues.map((c) => c.text);
+      const tr = cur.tr && cur.tr.length === lines.length ? cur.tr.slice() : new Array(lines.length).fill(null);
+      const chunks = chunkLines(lines);
+      const v = getVideo();
+      const nowIdx = v ? Math.max(0, findLastCueIndex(cur.cues, v.currentTime * 1000)) : 0;
+      let first = chunks.findIndex(([f, t]) => nowIdx >= f && nowIdx < t);
+      if (first < 0) first = 0;
+      const order = chunks.slice(first).concat(chunks.slice(0, first));
+      try {
+        for (const [f, t] of order) {
+          if (cur.job !== job) return;
+          if (tr.slice(f, t).every((x) => typeof x === 'string')) continue;
+          const parts = await translateRange(lines, f, t, baseLang(cur.lang));
+          if (cur.job !== job) return;
+          for (let i = 0; i < parts.length; i++) tr[f + i] = parts[i];
+          cur.tr = tr.slice();
+          render(true);
+          await new Promise((r) => setTimeout(r, 300));
+        }
+        saveCachedTranslation(trKey(), tr);
+      } catch (e) {
+        showNote('Çeviri şu an alınamadı, biraz sonra tekrar deneyin.');
+      } finally {
+        if (cur.translating === job) cur.translating = 0;
+      }
+    }
+
+    // --- Gerektiğinde göster (TR tuşu) ---------------------------------------
+    function openOnDemand() {
+      const v = getVideo();
+      if (!v || !cur.cues.length) return showNote('Henüz altyazı yüklenmedi.');
+      const t = v.currentTime * 1000;
+      let i = findActiveCueIndex(cur.cues, t);
+      if (i < 0) i = findLastCueIndex(cur.cues, t);
+      if (i < 0) return showNote('Henüz konuşma başlamadı.');
+      const range = sentenceRange(cur.cues, i);
+      const en = cur.cues.slice(range[0], range[1] + 1).map((c) => c.text).join(' ');
+      const session = ++od.session;
+      od = { open: true, en, tr: 'Çevriliyor…', range, session };
+      v.pause();
+      render(true);
+      translateText(en).then((tr) => {
+        if (od.open && od.session === session) { od.tr = tr; render(true); }
+      }).catch(() => {
+        const cached = cur.tr && cur.tr.slice(range[0], range[1] + 1);
+        if (od.open && od.session === session) {
+          od.tr = cached && cached.every(Boolean) ? cached.join(' ') : 'Çeviri şu an alınamadı.';
+          render(true);
+        }
+      });
+    }
+    function closeOnDemand(play) {
+      if (!od.open) return;
+      od = { open: false, en: '', tr: '', range: null, session: od.session };
+      render(true);
+      const v = getVideo();
+      if (play && v) v.play().catch(() => {});
+    }
+
+    // --- Ekran -----------------------------------------------------------------
+    GM_addStyle(CSS_TEXT);
+    let ui = null;
+    let noteTimer = 0;
+    let pendingNote = '';
+
+    function el(tag, cls, text) {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+    function shield(node) {
+      ['pointerdown', 'pointerup', 'mousedown', 'mouseup', 'touchstart', 'touchend', 'click', 'dblclick']
+        .forEach((t) => node.addEventListener(t, (e) => e.stopPropagation()));
+      return node;
+    }
+    function onTap(node, fn) {
+      node.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); fn(); });
+      return node;
+    }
+
+    function buildUi() {
+      const root = el('div'); root.id = 'ca-root';
+      const box = el('div'); box.id = 'ca-box';
+      const lineEn = el('div', 'ca-line ca-en');
+      const lineTr = el('div', 'ca-line ca-tr');
+      box.append(lineEn, lineTr);
+
+      const ctrl = shield(el('div')); ctrl.id = 'ca-ctrl';
+      const trBtn = onTap(el('button', 'ca-btn', 'TR'), () => (od.open ? closeOnDemand(true) : openOnDemand()));
+      trBtn.title = 'Türkçesini göster';
+      trBtn.setAttribute('aria-label', 'Türkçesini göster');
+      const gearBtn = onTap(el('button', 'ca-btn ca-gear', '⚙'), togglePanel);
+      gearBtn.title = 'Çift Altyazı ayarları';
+      gearBtn.setAttribute('aria-label', 'Çift Altyazı ayarları');
+      ctrl.append(trBtn, gearBtn);
+
+      const panel = shield(el('div')); panel.id = 'ca-panel'; panel.hidden = true;
+      panel.append(el('h3', '', 'Çift Altyazı ayarları'));
+      const mkRow = (label, options, getVal, setVal) => {
+        const row = el('div', 'ca-row');
+        row.append(el('div', 'ca-row-label', label));
+        const seg = el('div', 'ca-seg');
+        const btns = options.map(([val, text]) => {
+          const b = onTap(el('button', 'ca-opt', text), () => setVal(val));
+          b.dataset.val = String(val);
+          seg.append(b);
+          return b;
+        });
+        row.append(seg);
+        panel.append(row);
+        return () => btns.forEach((b) => b.classList.toggle('ca-sel', b.dataset.val === String(getVal())));
+      };
+      const upd1 = mkRow('İngilizce (orijinal) altyazı', [[true, 'Açık'], [false, 'Kapalı']],
+        () => settings.showOriginal, (v) => saveSettings({ showOriginal: v }));
+      const upd2 = mkRow('Türkçe çeviri', [['always', 'Sürekli göster'], ['onDemand', 'Gerektiğinde göster']],
+        () => settings.trMode, (v) => saveSettings({ trMode: v }));
+      const close = onTap(el('button', 'ca-close', 'Kapat'), togglePanel);
+      panel.append(close);
+
+      const note = el('div'); note.id = 'ca-note'; note.hidden = true;
+      root.append(box, ctrl, panel, note);
+      return { root, box, lineEn, lineTr, ctrl, trBtn, gearBtn, panel, note, updRows: () => { upd1(); upd2(); } };
+    }
+
+    function togglePanel() {
+      ensureUi();
+      if (!ui) return;
+      ui.panel.hidden = !ui.panel.hidden;
+      updatePanel();
+    }
+    function updatePanel() { if (ui) ui.updRows(); }
+
+    function showNote(text) {
+      pendingNote = text;
+      if (!ensureUi()) return;
+      ui.note.textContent = text;
+      ui.note.hidden = false;
+      pendingNote = '';
+      clearTimeout(noteTimer);
+      noteTimer = setTimeout(() => { if (ui) ui.note.hidden = true; }, 6000);
+    }
+
+    const getPlayer = () => document.getElementById('movie_player');
+    const getVideo = () => {
+      const mp = getPlayer();
+      return (mp && mp.querySelector('video')) || document.querySelector('video');
+    };
+    const isWatchPage = () => /\/watch/.test(location.pathname);
+
+    function ensureUi() {
+      const mp = getPlayer();
+      if (!mp || !isWatchPage()) {
+        if (ui && ui.root.isConnected) ui.root.remove();
+        return false;
+      }
+      if (!ui) ui = buildUi();
+      // Mobil YouTube'da dokunma kontrolleri #movie_player'ın dışında ve üstünde durur;
+      // tuşlarımız dokunulabilir olsun diye ortak üst kaba ekle.
+      const pc = mp.closest('#player-container-id');
+      const host = pc || mp;
+      if (ui.root.parentNode !== host) host.appendChild(ui.root);
+      if (pendingNote) showNote(pendingNote);
+      return true;
+    }
+
+    let lastSig = '';
+    function render(force) {
+      if (!ensureUi()) { document.documentElement.classList.remove('ca-active'); return; }
+      const mp = getPlayer();
+      const v = getVideo();
+      const hasCues = cur.cues.length > 0 && cur.videoId && location.href.includes(cur.videoId);
+      document.documentElement.classList.toggle('ca-active', !!hasCues);
+
+      let en = '', tr = '';
+      if (hasCues && od.open) {
+        en = settings.showOriginal ? od.en : '';
+        tr = od.tr;
+      } else if (hasCues && v) {
+        const i = findActiveCueIndex(cur.cues, v.currentTime * 1000);
+        if (i >= 0) {
+          if (settings.showOriginal) en = cur.cues[i].text;
+          if (settings.trMode === 'always' && cur.tr && typeof cur.tr[i] === 'string') tr = cur.tr[i];
+        }
+      }
+      const fs = Math.round(Math.max(14, Math.min(34, (mp.clientHeight || 400) * 0.045)));
+      const sig = [en, tr, fs, settings.trMode, hasCues, od.open].join('\u0001');
+      if (!force && sig === lastSig) return;
+      lastSig = sig;
+      ui.box.style.fontSize = fs + 'px';
+      ui.lineEn.textContent = en;
+      ui.lineEn.hidden = !en;
+      ui.lineTr.textContent = tr;
+      ui.lineTr.hidden = !tr;
+      ui.trBtn.hidden = !(hasCues && settings.trMode === 'onDemand');
+      ui.trBtn.classList.toggle('ca-on', od.open);
+    }
+
+    // Video başka yoldan oynatılır ya da sarılırsa Türkçe paneli kapat.
+    document.addEventListener('play', (e) => { if (od.open && e.target === getVideo()) closeOnDemand(false); }, true);
+    document.addEventListener('seeking', (e) => { if (od.open && e.target === getVideo()) closeOnDemand(false); }, true);
+
+    setInterval(() => render(false), 150);
+
+    GM_registerMenuCommand('Çift Altyazı ayarları', () => { ensureUi(); if (ui && ui.panel.hidden) togglePanel(); });
+
     injectPagePart(token);
     setTimeout(() => {
-      if (!bridge.ready && injectViaEval(token)) debug.events.push({ type: 'eval-fallback' });
+      if (!bridgeReady && injectViaEval(token)) debug.events.push({ type: 'eval-fallback' });
     }, 6000);
-
-    window.__ciftAltyaziBridge = bridge;
-    bridge.send = sendToPage;
+    setTimeout(() => {
+      if (!bridgeReady && isWatchPage()) showNote('Çift Altyazı YouTube sayfasına bağlanamadı. Sayfayı yenileyin.');
+    }, 12000);
   }
+
+  const CSS_TEXT = `
+#ca-root{position:absolute;inset:0;pointer-events:none;z-index:60;font-family:Roboto,Arial,sans-serif}
+#ca-box{position:absolute;left:50%;bottom:13%;transform:translateX(-50%);width:max-content;max-width:86%;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.ca-line{background:rgba(8,8,8,.78);color:#fff;padding:2px 10px;border-radius:6px;line-height:1.35;white-space:pre-wrap}
+.ca-line[hidden]{display:none}
+.ca-tr{color:#ffd54a}
+#ca-ctrl{position:absolute;right:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;pointer-events:auto}
+.ca-btn{width:48px;height:48px;border-radius:50%;border:2px solid rgba(255,255,255,.85);background:rgba(0,0,0,.55);color:#fff;font:700 16px/1 Roboto,Arial,sans-serif;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;margin:0;opacity:.8;-webkit-tap-highlight-color:transparent}
+.ca-btn[hidden]{display:none}
+.ca-btn.ca-gear{font-size:22px}
+.ca-btn.ca-on{background:#ffd54a;color:#111;border-color:#ffd54a;opacity:1}
+#ca-panel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(20,20,20,.96);color:#fff;border-radius:12px;padding:16px 18px;pointer-events:auto;width:min(420px,90%);box-sizing:border-box;font-size:16px;box-shadow:0 4px 24px rgba(0,0,0,.5);z-index:2}
+#ca-panel[hidden]{display:none}
+#ca-panel h3{margin:0 0 10px;font-size:18px;font-weight:700}
+.ca-row{margin:12px 0}
+.ca-row-label{margin-bottom:6px;color:#ddd}
+.ca-seg{display:flex;gap:8px}
+.ca-opt{flex:1;min-height:44px;padding:8px 10px;border-radius:8px;border:1px solid #666;background:#333;color:#fff;font-size:15px;cursor:pointer}
+.ca-opt.ca-sel{background:#ffd54a;color:#111;border-color:#ffd54a;font-weight:700}
+.ca-close{margin-top:8px;width:100%;min-height:44px;border-radius:8px;border:0;background:#555;color:#fff;font-size:16px;cursor:pointer}
+#ca-note{position:absolute;left:10px;top:10px;max-width:70%;background:rgba(0,0,0,.8);color:#fff;padding:6px 10px;border-radius:6px;font-size:14px;line-height:1.4}
+#ca-note[hidden]{display:none}
+html.ca-active .ytp-caption-window-container,html.ca-active #ytp-caption-window-container{display:none!important}
+`;
+  main();
 })();

@@ -28,7 +28,13 @@ const shims = `
   const k = (key) => 'ca-gm:' + key;
   window.GM_getValue = (key, def) => { try { const v = localStorage.getItem(k(key)); return v == null ? def : JSON.parse(v); } catch (e) { return def; } };
   window.GM_setValue = (key, val) => { localStorage.setItem(k(key), JSON.stringify(val)); };
-  window.GM_addStyle = (css) => { const s = document.createElement('style'); s.textContent = css; (document.head || document.documentElement).appendChild(s); return s; };
+  window.GM_deleteValue = (key) => { localStorage.removeItem(k(key)); };
+  window.GM_addStyle = (css) => {
+    const s = document.createElement('style'); s.textContent = css;
+    const put = () => { const p = document.head || document.documentElement; if (!p) return false; p.appendChild(s); return true; };
+    if (!put()) { const mo = new MutationObserver(() => { if (put()) mo.disconnect(); }); mo.observe(document, { childList: true, subtree: true }); }
+    return s;
+  };
   window.GM_registerMenuCommand = (name, fn) => { (window.__menu = window.__menu || {})[name] = fn; };
   window.GM_xmlhttpRequest = (d) => {
     window.__gmRequests = (window.__gmRequests || 0) + 1;
@@ -76,6 +82,7 @@ const setup = `async (page) => {
   await p.mouse.click(390, 268);
   await p.waitForTimeout(7000);
   const dbg = await p.evaluate(() => (window.__ciftAltyaziDebug || { events: [] }).events);
+  await p.screenshot({ path: ${JSON.stringify(path.join(here, 'out', 'setup.png').replace(/\\/g, '/'))} });
   return { url: p.url(), mocked: globalThis.__mocked || 0, events: dbg, errors };
 }`;
 
