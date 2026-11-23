@@ -1,0 +1,4 @@
+node_modules/
+.scratch*
+.playwright-mcp/
+test/harness/out/

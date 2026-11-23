@@ -1,0 +1,3214 @@
+{
+  "wireMagic": "pb3",
+  "pens": [
+    {}
+  ],
+  "wsWinStyles": [
+    {},
+    {
+      "mhModeHint": 0,
+      "juJustifCode": 0,
+      "sdScrollDir": 3
+    }
+  ],
+  "wpWinPositions": [
+    {},
+    {
+      "apPoint": 6,
+      "ahHorPos": 20,
+      "avVerPos": 100,
+      "rcRows": 2,
+      "ccCols": 40
+    },
+    {
+      "apPoint": 7,
+      "ahHorPos": 50,
+      "avVerPos": 100,
+      "rcRows": 2,
+      "ccCols": 40
+    }
+  ],
+  "events": [
+    {
+      "tStartMs": 0,
+      "id": 1,
+      "wpWinPosId": 2,
+      "wsWinStyleId": 1
+    },
+    {
+      "tStartMs": 80,
+      "dDurationMs": 5199,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "What if I told you that the difference\nbetween feeling like you're just",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 3040,
+      "dDurationMs": 7040,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "surviving your days versus absolutely\nthriving comes down to a few simple",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 7600,
+      "dDurationMs": 6959,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "habits? Today, I'm testing the exact\nroutine that top 1% of women use on",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 13120,
+      "dDurationMs": 5200,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "their days off. And I'm going to be\nbrutally honest about whether it",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 16480,
+      "dDurationMs": 5760,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "actually works. We're talking brain\ndumps, strategic planning, and the",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 20240,
+      "dDurationMs": 5279,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "science of productivity. If you've ever\nfelt like you're just getting through",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 23519,
+      "dDurationMs": 5680,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "your days instead of designing the life\nyou actually want, this video is for",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 27599,
+      "dDurationMs": 6201,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "you. Let's see if these habits can\nactually transform how I feel about",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 30960,
+      "dDurationMs": 7959,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "myself and my life.\n[Music]",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 68080,
+      "dDurationMs": 6480,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "Good morning, you guys. So, the first\npart of this routine is called a brain",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 72880,
+      "dDurationMs": 4800,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "dump. And it honestly kind of makes\nsense because I don't know if I'm the",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 75920,
+      "dDurationMs": 5360,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "only one, but sometimes I wake up in the\nmorning and I just get this anxious,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 79520,
+      "dDurationMs": 5680,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "overwhelming feeling of everything that\nI have to do. It's just all kind of in",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 83520,
+      "dDurationMs": 5760,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "my brain and I haven't written it down\non paper yet. So, it kind of makes sense",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 87119,
+      "dDurationMs": 5441,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "how this is like the number one step of\nthe routine is you literally wake up,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 91119,
+      "dDurationMs": 4481,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "get your journal out, and then just\nstart to brain dump. Because what",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 94159,
+      "dDurationMs": 5441,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "research says is that when we\nexternalize our thoughts onto paper, we",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 98079,
+      "dDurationMs": 5521,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "literally reduce our mental load and\nalso our decision fatigue. If you think",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 101680,
+      "dDurationMs": 6160,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "of your brain as a computer, if you have\ntoo many tabs on, that's just going to",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 105600,
+      "dDurationMs": 4799,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "naturally slow the computer down. So, it\nkind of makes sense. If you have too",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 109119,
+      "dDurationMs": 4320,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "much going on in your mind, you're not\ngoing to be able to function properly,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 111840,
+      "dDurationMs": 4959,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "and you're not going to be able to act\nand pursue your highest potential. So,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 115280,
+      "dDurationMs": 5040,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "right now, I'm going to write down every\nsingle task, every single thought, and",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 118880,
+      "dDurationMs": 5440,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "every single worry that is currently\ncluttering my mind. And I mean literally",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 122320,
+      "dDurationMs": 5439,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "everything as small as texting a friend\nback to actually like the more serious",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 126079,
+      "dDurationMs": 4320,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "tasks that I have to do today in my\nappointments and stuff. And I'm not",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 128879,
+      "dDurationMs": 4720,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "going to judge myself when it comes down\nto writing all of this down right now",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 132319,
+      "dDurationMs": 5441,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "because that's the whole point of a\nbrain dump is to make it messy, to make",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 135520,
+      "dDurationMs": 5040,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "it kind of chaotic, unorganized. It\ndoesn't matter. Just as long as you're",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 139200,
+      "dDurationMs": 5520,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "getting all of your thoughts, your\nworries down onto a sheet of paper and",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 142959,
+      "dDurationMs": 5201,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "getting it out from your brain onto the\npaper. That is what this is about. So,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 146800,
+      "dDurationMs": 5200,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "don't try to make it aesthetic. Don't\ntry to make it organized. We're going to",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 149680,
+      "dDurationMs": 18720,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "organize it in a sec. So, let's get all\nof this from up here down to on here.",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 155310,
+      "dDurationMs": 16929,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "[Music]"
+        },
+        {
+          "utf8": "\nThat was actually genuinely so",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 170160,
+      "dDurationMs": 6320,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "therapeutic. Look at my little brain\ndump. That was all in my mind. Those",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 175120,
+      "dDurationMs": 4960,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "were just thoughts circulating like, \"Oh\nmy god, I need to do that. I need to go",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 178000,
+      "dDurationMs": 5040,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "here. I need to pick up that.\" I feel so\nmuch clearer just doing that. I don't",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 181599,
+      "dDurationMs": 3841,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "know why I don't do this every day\nbecause I'm always like, \"Oh, everything",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 184080,
+      "dDurationMs": 5040,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "needs to be aesthetic when I write down\nmy to-do list.\" But like a brain dump, I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 187280,
+      "dDurationMs": 5360,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "feel like is so needed before you even\nmake a to-do list for the day. Here's",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 190959,
+      "dDurationMs": 5681,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "when it gets interesting because for\nthis routine, we are not making a",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 194319,
+      "dDurationMs": 7200,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "traditional to-do list. We're going to\nuse something called the Eisenhower",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 199040,
+      "dDurationMs": 5760,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "matrix or Eisenhower matrix. I don't\nknow how to pronounce it properly, which",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 202959,
+      "dDurationMs": 6241,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "is kind of like a to-do list, but it\ncategorizes things a lot better so your",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 207360,
+      "dDurationMs": 5200,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "mind can process it easier. So, I'm\ngoing to show you guys exactly how that",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 210799,
+      "dDurationMs": 6441,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "works and looks. This would be my first\ntime actually doing this exact method,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 214400,
+      "dDurationMs": 13040,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "so I'm excited to try it out today.\n[Music]",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 225040,
+      "dDurationMs": 7600,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "Okay, so this divides everything into\nfour categories for your to-do list.",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 230000,
+      "dDurationMs": 7280,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "Urgent and important, not urgent but\nimportant, urgent but not important, and",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 235360,
+      "dDurationMs": 5840,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "not urgent and not important. And\nsupposedly the magic happens here when",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 239360,
+      "dDurationMs": 6320,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "you realize that most of us spend our\ntime in the urgent but not important",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 243840,
+      "dDurationMs": 6720,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "category. Responding to other people's\npriorities instead of our own. So this",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 247680,
+      "dDurationMs": 7040,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "is such a helpful way to design your day\nso that you could start with this",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 252239,
+      "dDurationMs": 6161,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "category and then move your way through.\nAnd then as the day goes on, you will",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 256479,
+      "dDurationMs": 6881,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "get less stressed and less stressed as\nyou continue to dwindle down the to-dos",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 261519,
+      "dDurationMs": 5361,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "since they become less important. So\nlet's fill this out right now for the",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 264960,
+      "dDurationMs": 18799,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "first time ever. I'm really really\nexcited.",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 268670,
+      "dDurationMs": 19730,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "[Music]"
+        },
+        {
+          "utf8": "\nOkay, I just completed the full thing",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 286320,
+      "dDurationMs": 5120,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "and oh my goodness, I am going to\nprobably start doing this every single",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 289840,
+      "dDurationMs": 6079,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "day cuz this genuinely just puts\neverything out on paper to me and my",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 293600,
+      "dDurationMs": 5360,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "brain can see this in such like a put\ntogether way where now I'm like, \"Okay,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 297440,
+      "dDurationMs": 5039,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "start here and work my way down that\nway.\" My brain does not feel cluttered",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 300560,
+      "dDurationMs": 6639,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "anymore. And studies show that this can\nreduce decision fatigue by 30%. which",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 305680,
+      "dDurationMs": 5840,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "means I'm actually saving my mental\nenergy for what actually matters cuz I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 309520,
+      "dDurationMs": 6399,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "feel like I always have such a hard time\nkind of doing that and allocating my",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 313680,
+      "dDurationMs": 5280,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "energy. So, this is amazing. My urgent\nthings that I have to do today since",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 317440,
+      "dDurationMs": 4400,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "it's like my day off is my bank\nappointment and then I'm canceling my",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 320400,
+      "dDurationMs": 4720,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "membership somewhere. This is the best\nthing ever. Highly would recommend",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 323360,
+      "dDurationMs": 4720,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "trying it. I already feel light as a\nfeather. Let's get our day really",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 326400,
+      "dDurationMs": 5519,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "started now that we have a plan. So,\npart of my top 1% women routine is being",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 330160,
+      "dDurationMs": 4479,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "very intentional on how I show up and\nnot just in my habits, but in the little",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 333360,
+      "dDurationMs": 4320,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "details as well. And for me, that\nincludes actually keeping my photos",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 336080,
+      "dDurationMs": 4399,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "aligned with how I felt in the moment\nwhile taking them. Cuz if I'm feeling",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 339120,
+      "dDurationMs": 4480,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "myself, I want my photos to turn out\ngood and look good. So, this is a selfie",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 342000,
+      "dDurationMs": 4560,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "that I took earlier today. I already\nliked it. The energy was there. I felt",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 345199,
+      "dDurationMs": 4321,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "good about myself, but the lighting was\njust a little bit flat and it didn't",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 347840,
+      "dDurationMs": 4560,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "fully reflect how I wanted the photo to\nlook. So, what I'm going to do right now",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 350720,
+      "dDurationMs": 4720,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "is open face up, which I use as a\nprofessional photo polishing tool, not",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 354080,
+      "dDurationMs": 4399,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "to change how I look, but kind of just\nrefine what's already there and make it",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 357280,
+      "dDurationMs": 4720,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "better. So, I'm going to start with\nimpressions. And I always keep it super",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 360240,
+      "dDurationMs": 4880,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "light, usually just level one or two so\nit's very natural, just to balance out",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 363520,
+      "dDurationMs": 4720,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "the photo and bring back some dimension.\nAnd then I'll go into skin and not to",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 366639,
+      "dDurationMs": 4400,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "blur or mask anything, but just to kind\nof gently even out the image so it looks",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 369759,
+      "dDurationMs": 3681,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "clean and well lit. Kind of just like\nadjusting the lighting in real life. As",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 372400,
+      "dDurationMs": 3840,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "you can see, there's so many options\nhere on what you could do. I'm think I'm",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 374800,
+      "dDurationMs": 4560,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "going to go with glowing because\nobviously the lighting is not doing that",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 377840,
+      "dDurationMs": 4960,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "for me in this photo. And you can even\nadd little freckles to the photo. You",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 381520,
+      "dDurationMs": 4080,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "could give yourself a little tan.\nSometimes I'll add just the smallest",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 384080,
+      "dDurationMs": 4720,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "touch of makeup cuz a lot of the times I\nfeel like my mascara just doesn't do",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 386960,
+      "dDurationMs": 5359,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "justice on camera. I love adding\neyelashes. If you're too lazy to do like",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 390319,
+      "dDurationMs": 4641,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "full glam, you can just add it on, which\nis fun. The pro tools are really what",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 393759,
+      "dDurationMs": 3841,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "makes it feel more natural and\nintentional. You can also go into the",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 396400,
+      "dDurationMs": 4400,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "hair and see what you would look like\nwith different hair colors, which I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 399280,
+      "dDurationMs": 3759,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "think that is so cool. I can just\nlighten up my hair. Like that's what I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 402000,
+      "dDurationMs": 3759,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "would look like if I was blonde, which\nis insane. So cool just to see in case",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 404639,
+      "dDurationMs": 3921,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "you're like on the fence about dying\nyour hair. I'm even just going to add a",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 406960,
+      "dDurationMs": 4320,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "little blush. There we go. So, this is\nthe before and that is the after. As you",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 410240,
+      "dDurationMs": 3519,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "can see, it just really brightens my\nface up. Looks like I had a ring light",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 412560,
+      "dDurationMs": 4880,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "on me. If you guys want to try this out\nfor yourself, you could try the Face App",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 415120,
+      "dDurationMs": 4479,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "Pro Tool with a 7-day free trial. So you\nguys can click the link in my",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 418319,
+      "dDurationMs": 4241,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "description or just scan the QR code\nhere that's on the screen to download",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 420960,
+      "dDurationMs": 4160,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "Face App today and test it out for\nyourself. Thank you so much to Face App",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 423759,
+      "dDurationMs": 6321,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "for sponsoring this portion of the\nvideo. Okay guys, I just got all ready",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 427840,
+      "dDurationMs": 7120,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "to go and work out. It is freezing\noutside. It is the first time that the",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 432479,
+      "dDurationMs": 5840,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "temperatures have dropped below zero and\nthis just all of a sudden happened right",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 436560,
+      "dDurationMs": 5840,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "after Christmas. We weren't even getting\nthat cold of weather until literally",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 440479,
+      "dDurationMs": 5280,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "just a couple days ago and then all of a\nsudden our weather started getting",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 443759,
+      "dDurationMs": 5201,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "freezing and it might snow soon. So, I'm\nlike, \"Oh, great. How it's happening",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 447360,
+      "dDurationMs": 5200,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "after Christmas when the whole point of\nsnow was to be before Christmas.\" Little",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 450639,
+      "dDurationMs": 6481,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "disappointing. But anyways, I haven't\ndone like an outdoor workout in so long,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 455360,
+      "dDurationMs": 4959,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "just because the weather has been rainy\nduring the winter, especially. The sun",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 458720,
+      "dDurationMs": 5840,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "literally just came out. When the sun\ncomes out, that is my sign to go and do",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 462720,
+      "dDurationMs": 5360,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "a nice run, but I know it's really good\nfor cardiovascular health. And I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 466080,
+      "dDurationMs": 5679,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "actually have an aura ring to like track\nmy heartbeats and stuff and my steps and",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 470400,
+      "dDurationMs": 4479,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "my length of the run and everything.\nWhen I was younger, fun fact, I used to",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 473360,
+      "dDurationMs": 4480,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "be really, really into running. I used\nto do track. Also, I played soccer",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 476400,
+      "dDurationMs": 4479,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "basically my whole life. I feel like\nI've always had pretty good cardio, but",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 479440,
+      "dDurationMs": 5360,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "in the past few years, especially after\nquitting soccer and everything. My",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 482800,
+      "dDurationMs": 5920,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "running game is not good. I run for like\n2 minutes and I'm out of breath. So, I'm",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 486800,
+      "dDurationMs": 5679,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "just going to keep a steady pace outside\ntoday and not going to make the run too",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 490720,
+      "dDurationMs": 5440,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "long. But, there is like these\nendorphins that release in my body,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 494319,
+      "dDurationMs": 6801,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "specifically when I run that make me\nfeel so amazing and good. If you are a",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 498800,
+      "dDurationMs": 5280,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "busy person, working out is probably the\nlast thing on your list and it's",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 502879,
+      "dDurationMs": 5600,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "probably the first thing you're going to\nskip if you're super busy. But if you",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 506319,
+      "dDurationMs": 6241,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "make time to work out or just move your\nbody for 10 minutes a day, it can make",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 510400,
+      "dDurationMs": 6160,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "such a big impact. When we work out,\nthere's something in our brains that",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 513760,
+      "dDurationMs": 6320,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "release called BDNF, which is brain\nderived neurotropic factor. And you",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 518640,
+      "dDurationMs": 5680,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "could kind of think about this as like a\nfertilizer for your brain cells. It",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 522320,
+      "dDurationMs": 5280,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "literally helps you grow new neurons and\nit also strengthens the connection",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 526000,
+      "dDurationMs": 4800,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "between them. And this isn't even about\nlooking good or being healthy. Of",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 529360,
+      "dDurationMs": 5360,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "course, those are amazing benefits of\nworking out. But scientifically, this is",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 532640,
+      "dDurationMs": 6160,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "also about upgrading your cognitive\nfunction for better memory, sharper",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 536880,
+      "dDurationMs": 5680,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "focus, improve mood, enhanced\ndecision-m. So, a 20 to 30 minute",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 540959,
+      "dDurationMs": 5281,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "workout doesn't just prep your body for\nthe day, but it also primes your brain",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 544399,
+      "dDurationMs": 4961,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "for success. So, anyways, with all that\nto say, let's go do this freaking",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 547839,
+      "dDurationMs": 6281,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "workout, get our body moving, and\nimprove the brain function up here.",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 554590,
+      "dDurationMs": 13890,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "[Music]"
+        },
+        {
+          "utf8": "\nRight now, my brain is flooding with",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 566320,
+      "dDurationMs": 5840,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "endorphins, natural mood elevators that\nare literally more powerful than",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 569920,
+      "dDurationMs": 5599,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "morphine. My preffrontal cortex is\ngetting increased blood flow, which",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 573760,
+      "dDurationMs": 6079,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "means better decision-making and focus\nfor the rest of my day. Research shows",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 577680,
+      "dDurationMs": 6320,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "that people who exercise in the morning\nmake 23% better food choices throughout",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 582240,
+      "dDurationMs": 7260,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "the day. Every minute of this run is\nsetting me up for success in ways I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 585920,
+      "dDurationMs": 17379,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "can't even see yet.\n[Music]",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 607080,
+      "dDurationMs": 10600,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "[Music]"
+        },
+        {
+          "utf8": "\nOkay, so that brings us to part three,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 615839,
+      "dDurationMs": 5921,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "which is self-care. This isn't just\npampering. This is all strategic",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 619680,
+      "dDurationMs": 7040,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "self-care backed by science. So, I'm\nstarting off with dry brushing, which",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 623680,
+      "dDurationMs": 7040,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "increases blood circulation by up to 30%\nand stimulates my lymphatic system to",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 628720,
+      "dDurationMs": 5840,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "help eliminate toxins. But here's what's\nreally happening. I'm activating my",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 632320,
+      "dDurationMs": 7280,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "parasympathetic nervous system, which is\nmy body's rest and digest mode, which",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 637040,
+      "dDurationMs": 8000,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "reduces cortisol and promotes healing. I\nlove this Loxy Tanana oil. It smells so",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 642399,
+      "dDurationMs": 6721,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "freaking good and it feels so luxurious.\nThe scent alone though is triggering",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 646800,
+      "dDurationMs": 6560,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "positive associations in my brain, which\nis boosting my mood before I even leave",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 651360,
+      "dDurationMs": 7360,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "the house. And to end off the self-care,\nI'm putting on a face mask because it's",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 655680,
+      "dDurationMs": 6560,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "15 to 30 minutes of forced self-\nprioritization. Research shows that when",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 660800,
+      "dDurationMs": 5200,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "we take care of our physical appearance,\nwe actually perform better in all areas",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 664320,
+      "dDurationMs": 5280,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "of life. It's called the lipstick\neffect. I'm not just getting ready and",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 667680,
+      "dDurationMs": 5680,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "preparing to show up confidently in my\nlife. I feel great right now after doing",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 671680,
+      "dDurationMs": 5680,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "self-care. You can't beat it. Like, I\nfeel like a princess. I feel pampered. I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 675440,
+      "dDurationMs": 6720,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "can still smell this shower oil on me.\nIt is the best shower oil ever. I just",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 679680,
+      "dDurationMs": 6320,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "feel so luxe. I feel pampered. I feel\namazing. Anyways, I'm just going to be",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 684399,
+      "dDurationMs": 4721,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "sorting my laundry right now because\nthat is one of my chores that I want to",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 687839,
+      "dDurationMs": 6081,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "do today. So, I'm just going to quickly\nsort out my laundry. I love listening to",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 691279,
+      "dDurationMs": 5761,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "a podcast while I do chores and stuff.\nSo, highly recommend. It kind of feels",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 695360,
+      "dDurationMs": 4400,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "like multitasking in a way, and it makes\nwhatever chore you're doing a lot more",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 698399,
+      "dDurationMs": 4401,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "fun. And obviously, you don't need to be\npaying attention to a screen cuz it's",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 701360,
+      "dDurationMs": 4080,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "just a podcast, which is good. If you\nguys don't know, I actually have my own",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 704079,
+      "dDurationMs": 3841,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "podcast with one of my best friends,\nTalia. So, if you guys want to check",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 706640,
+      "dDurationMs": 5280,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "that out, it's always linked in the\ndescription. But yeah, I love a good",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 709440,
+      "dDurationMs": 5120,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "podcast on while I'm doing chores,\nespecially an informative one. It",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 713440,
+      "dDurationMs": 3760,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "doesn't have to always be informative\ncuz sometimes you just want to let your",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 715839,
+      "dDurationMs": 5281,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "brain kind of relax. just kind of listen\nto brain rot podcasts. But I do love a",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 719120,
+      "dDurationMs": 7480,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "good informative podcast and just a good\nfun podcast in general. So whatever I'm",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 723120,
+      "dDurationMs": 3480,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "feeling that day",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 729140,
+      "dDurationMs": 11139,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "[Music]"
+        },
+        {
+          "utf8": "\nwants to say hi, do you want to join my",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 735279,
+      "dDurationMs": 5000,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "routine? She's like, no, I'm good.",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 742910,
+      "dDurationMs": 13729,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "[Music]"
+        },
+        {
+          "utf8": "\nOkay, so the next part of this routine",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 754560,
+      "dDurationMs": 5760,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "is just to do a little midday\nmeditation/reset",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 758240,
+      "dDurationMs": 5520,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "only for 5 minutes. I feel like when you\nhave a big to-do list, it's hard to take",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 762240,
+      "dDurationMs": 5760,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "time out of your day to just quite\nliterally sit down and think of nothing,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 765760,
+      "dDurationMs": 5600,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "do nothing, and just let your mind relax\nfor a quick second. When we're",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 769519,
+      "dDurationMs": 7041,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "constantly go, go, go. our stress\nhormone cortisol stays elevated which",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 774000,
+      "dDurationMs": 5839,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "actually impairs cognitive function. The\nthing is is a lot of people would think",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 777839,
+      "dDurationMs": 5680,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "that doing a meditation midday is a\nwaste of time but it's actually kind of",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 781760,
+      "dDurationMs": 5120,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "a little investment in making the rest\nof the day more effective cuz your brain",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 785440,
+      "dDurationMs": 3839,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "is going to work better. So all I'm\ngoing to do right now is I'm just",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 788079,
+      "dDurationMs": 3841,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "sitting at my table right now and I\ndidn't want to go on the couch because",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 790320,
+      "dDurationMs": 4880,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "sometimes when I do meditation on the\ncouch it makes me way too sleepy. So I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 794000,
+      "dDurationMs": 5040,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "just kind of wanted to sit in like an\nupright chair. I'm just going to focus",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 796880,
+      "dDurationMs": 6079,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "on my breath for 5 minutes and see how\nit impacts the rest of my day. So, right",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 801120,
+      "dDurationMs": 8189,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "now I'm going to set a little timer for\n5 minutes. 5 minute timer.",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 806130,
+      "dDurationMs": 3179,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "[Music]"
+        }
+      ]
+    },
+    {
+      "tStartMs": 812240,
+      "dDurationMs": 9599,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "[Laughter]"
+        },
+        {
+          "utf8": "\nThat was great. I don't even remember",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 820240,
+      "dDurationMs": 5599,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "the last time I did that. This is your\nsign to take 5 minutes out of your day",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 824000,
+      "dDurationMs": 6079,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "and just be present. I feel just zen\nright now and calm and anti-stressed.",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 828000,
+      "dDurationMs": 6240,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "That brings us to part three, which is\ndrinking matcha over coffee. Let's talk",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 832480,
+      "dDurationMs": 5520,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "about why I'm choosing matcha\nspecifically over coffee for this",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 836160,
+      "dDurationMs": 6479,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "routine. While coffee gives you that\nimmediate caffeine spike, matcha",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 840240,
+      "dDurationMs": 7360,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "contains eltheanine, which is an amino\nacid that creates what researchers call",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 845360,
+      "dDurationMs": 6880,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "calm alertness. Instead of jittery\nenergy followed by a crash, which is",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 850079,
+      "dDurationMs": 7921,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "what coffee does, matcha provides\nsustained focus for up to 6 hours,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 855279,
+      "dDurationMs": 6401,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "eltheanine increases alpha brain waves,\nthe same waves associated with",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 859680,
+      "dDurationMs": 6080,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "meditation and creativity. So, I'm\nliterally drinking my way to a more",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 863519,
+      "dDurationMs": 7760,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "focused creative state. Plus, matcha\ncontains 137 times more antioxidants",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 869040,
+      "dDurationMs": 7599,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "than regular green tea. So, this isn't\njust a drink. It's liquid productivity",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 874079,
+      "dDurationMs": 6320,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "with a side of zen. I make my matcha\nwith two teaspoons of matcha cuz I like",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 878480,
+      "dDurationMs": 6159,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "it really strong and I like it to have\nthat vibrant green color. I also order",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 882560,
+      "dDurationMs": 6560,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "my matcha on Amazon, which I will link\nfor you guys below. And then of course,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 886480,
+      "dDurationMs": 8640,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "I paired my matcha with breakfast to\ngive me some energy for the day.",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 893360,
+      "dDurationMs": 6240,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "Okay, now I'm officially primed and\nprepped to go out of the house, leave",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 897120,
+      "dDurationMs": 6240,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "the house, and do my errands. I had my\nappointment, and then I just had a few",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 901519,
+      "dDurationMs": 5841,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "packages to pick up. It was so nice to\nmark those off the to-do list. So, a",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 905279,
+      "dDurationMs": 6560,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "very important thing in the top 1% woman\nroutine is learning. This is something",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 909760,
+      "dDurationMs": 5199,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "that I actually want to set for my new\none of my New Year's resolutions, one of",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 913519,
+      "dDurationMs": 5921,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "my New Year's goals. I feel like if\nyou're not in school, you're not really",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 917920,
+      "dDurationMs": 5120,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "learning every day. Obviously, like\nwe're all learning life lessons and like",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 921199,
+      "dDurationMs": 6161,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "stuff like that, but just in terms of\nactually getting educated on different",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 925279,
+      "dDurationMs": 4800,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "subjects and things, it's not that easy\njust to be doing that when our",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 928639,
+      "dDurationMs": 4880,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "generation is basically just scrolling\non social media in our free time. And I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 932320,
+      "dDurationMs": 5680,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "feel like learning is definitely\nsomething that I want to implement into",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 935680,
+      "dDurationMs": 5920,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "next year and really just hone in on\nthat. Take a subject that I'm interested",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 939839,
+      "dDurationMs": 4961,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "in and start learning about it. Start\nbuying books on it. Yeah, I really",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 943279,
+      "dDurationMs": 5120,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "really like this book for that reason.\nIt's called 101 essays that will change",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 946800,
+      "dDurationMs": 5039,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "the way you think. And each kind of\nessay is something that kind of makes",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 950079,
+      "dDurationMs": 6000,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "your mind think. It kind of teaches you\nthings. A great informative book on a",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 954160,
+      "dDurationMs": 6239,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "specific subject or kind of a little bit\nmore broad like this is great to pick up",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 958240,
+      "dDurationMs": 5920,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "just to get your brain working because I\nfeel like a lot of the times our brains",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 961920,
+      "dDurationMs": 6159,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "are stuck in the same thought patterns\nevery single day. But if you implement",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 966240,
+      "dDurationMs": 5599,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "something new and switch things up, then\nit could really lead you to create new",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 969680,
+      "dDurationMs": 6560,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "neural pathways. Studies actually show\nthat continuous learning can improve",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 973839,
+      "dDurationMs": 6721,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "cognitive flexibility and also promote\nneuroplasticity, literally rewiring your",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 978560,
+      "dDurationMs": 6320,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "brain to be more resilient and\ninnovative. And it also obviously breaks",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 982560,
+      "dDurationMs": 5839,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "the cycle of passive consumption and\nbuilds a proactive mindset. So yeah,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 987199,
+      "dDurationMs": 4801,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "that's just something that I feel like\nsince I'm not in school, um I haven't",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 990160,
+      "dDurationMs": 5679,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "been in school in a very very long time\nbecause after I went to high school, I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 993920,
+      "dDurationMs": 6000,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "just did one year of college and then\nthat's when I dropped out and pursued",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 997759,
+      "dDurationMs": 6481,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "YouTube. Since then, I mean, I've done a\ncouple language classes here and there,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1001600,
+      "dDurationMs": 6239,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "but nothing that I've actually stuck by.\nSo I'm really really excited to kind of",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1006000,
+      "dDurationMs": 4880,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "have that at the top of my brain and\nimplement more of that going into this",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1009519,
+      "dDurationMs": 4961,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "next year. And it's honestly just a\nperfect thing to implement on your days",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1012480,
+      "dDurationMs": 5760,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "off. Even if you just do like 10, 20\nminutes of reading about a subject,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1016320,
+      "dDurationMs": 14570,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "learning about a subject, can't hurt.\nSo, let's do that.",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1022310,
+      "dDurationMs": 8580,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "[Music]"
+        }
+      ]
+    },
+    {
+      "tStartMs": 1035199,
+      "dDurationMs": 4880,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "the energy that I feel from the matcha\nthat I had like I genuinely always",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1038480,
+      "dDurationMs": 6000,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "whenever I drink coffee or matcha I\nalways feel a difference in the energy",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1042559,
+      "dDurationMs": 6000,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "with coffee when I drink it it's like a\nspike of energy and then I'm just wired",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1046720,
+      "dDurationMs": 5360,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "and then I have a crash. But with matcha\nI don't necessarily feel that like spike",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1050320,
+      "dDurationMs": 4479,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "of energy. It comes on a little bit more\nsubtly. And then all of a sudden, I'm",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1053280,
+      "dDurationMs": 4880,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "like, \"Oh my gosh, like I feel great,\nbut it lasts for so much longer.\" And",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1056480,
+      "dDurationMs": 4480,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "also, I don't have the crash. So, I\nshould have matcha way more often. I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1059679,
+      "dDurationMs": 4481,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "always just like make coffee cuz it's\njust like the easy thing to do. And we",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1062320,
+      "dDurationMs": 5120,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "have a really nice coffee maker, but I\nfeel like I just need to switch up and",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1065679,
+      "dDurationMs": 4801,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "make matchas more often. I feel like I\nalways make matcha in the summer, but",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1068880,
+      "dDurationMs": 4960,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "it's more so throughout the winter where\nI'm always just making hot coffees. Then",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1072240,
+      "dDurationMs": 5439,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "when I have matcha, it reminds me how\ngood it makes me feel versus like having",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1075840,
+      "dDurationMs": 5440,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "that coffee high. When I am in the\ncoffee high, it feels really good. But",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1079520,
+      "dDurationMs": 4880,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "then you have the consequences like\nright after. So it's like give or take",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1082880,
+      "dDurationMs": 5039,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "with coffee, but with matcha it has like\nso many benefits and I genuinely notice",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1086320,
+      "dDurationMs": 5920,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "like a difference in my energy levels\nthroughout the day with it. So matcha",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1089919,
+      "dDurationMs": 5441,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "over coffee any any day, especially for\nlike the anatomy of a woman's body. I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1094000,
+      "dDurationMs": 4080,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "know it's so much better. Just thought\nI'd update you guys on that cuz I",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1096640,
+      "dDurationMs": 4880,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "haven't had matcha in a while. This was\nmy first day having matcha in probably",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1099679,
+      "dDurationMs": 5120,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "like 2 months. And I notice the\ndifference. Like I really notice the",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1103120,
+      "dDurationMs": 6880,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "difference and it's so good. Now that\nleads us into part six which is the",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1107520,
+      "dDurationMs": 6560,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "evening windown. As a day winds down,\nthis routine emphasizes something that",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1111679,
+      "dDurationMs": 5921,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "our hustle culture often forgets, the\nimportance of genuine connection and",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1115919,
+      "dDurationMs": 5681,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "boundaries. Research shows that\nestablishing firm boundaries between",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1119360,
+      "dDurationMs": 5520,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "work and personal time reduces stress,\nimproves sleep quality, and actually",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1123200,
+      "dDurationMs": 5200,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "makes you more productive when you are\nworking. Also, getting to spend quality",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1126799,
+      "dDurationMs": 5921,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "time with your loved ones on your days\noff is so important. This quality time",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1130559,
+      "dDurationMs": 6561,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "isn't just nice to have, it's essential.\nmeaningful social interactions reduce",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1134720,
+      "dDurationMs": 6480,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "stress hormones and boost oxytocin,\nwhich not only increases happiness, but",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1139120,
+      "dDurationMs": 6080,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "can actually boost cognitive function as\nwell. Today taught me that productivity",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1143200,
+      "dDurationMs": 6000,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "isn't about doing more. It's about being\nmore intentional with what you do. It's",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1147600,
+      "dDurationMs": 6880,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "about designing your days instead of\njust surviving them. So, after doing",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1151520,
+      "dDurationMs": 6960,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "this top 1% woman routine, I think it\nactually works, but not in the way that",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1156400,
+      "dDurationMs": 5600,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "I expected. This isn't about perfection\nor having the perfect routine. It's",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1160480,
+      "dDurationMs": 5280,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "about recognizing that you have the\npower to design your days intentionally.",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1164080,
+      "dDurationMs": 6160,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "Every small choice from how you start\nyour morning to how you fuel your body",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1167840,
+      "dDurationMs": 6400,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "to how you and your evening is a vote\nfor the person you want to become. So,",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1172320,
+      "dDurationMs": 5599,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "here's my challenge to you. Pick one\nelement from this routine and try it for",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1176080,
+      "dDurationMs": 4800,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "the next week. And drop a comment down\nbelow and let me know which habit you're",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1179600,
+      "dDurationMs": 4720,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "going to try first. And if you\nexperiment with this routine, I want to",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1182799,
+      "dDurationMs": 5120,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "hear about your experience. Your future\nself is counting on the choices you make",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1186240,
+      "dDurationMs": 5040,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "today. Remember, you are not just\ngetting through your days, you're",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1189120,
+      "dDurationMs": 5120,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "designing your life. So, make it count.\nDon't forget to hit that subscribe",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1192559,
+      "dDurationMs": 24490,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "button down below, and I will see you\nguys in my next video.",
+          "acAsrConf": 0
+        }
+      ]
+    },
+    {
+      "tStartMs": 1196780,
+      "dDurationMs": 20269,
+      "wWinId": 1,
+      "segs": [
+        {
+          "utf8": "[Music]"
+        }
+      ]
+    }
+  ]
+}

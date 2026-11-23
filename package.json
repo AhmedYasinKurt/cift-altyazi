@@ -1,0 +1,9 @@
+{
+  "name": "cift-altyazi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Android tablette YouTube için çift altyazı (Firefox + Violentmonkey betiği)",
+  "scripts": {
+    "test": "node --test test/"
+  }
+}
