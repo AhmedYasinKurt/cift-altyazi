@@ -4,6 +4,6 @@
   "private": true,
   "description": "Android tablette YouTube için çift altyazı (Firefox + Violentmonkey betiği)",
   "scripts": {
-    "test": "node --test test/"
+    "test": "node --test \"test/**/*.test.js\""
   }
 }
