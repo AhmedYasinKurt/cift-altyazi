@@ -14,6 +14,10 @@
 // @grant        GM_addStyle
 // @grant        GM_registerMenuCommand
 // @connect      translate.googleapis.com
+// @homepageURL  https://github.com/AhmedYasinKurt/cift-altyazi
+// @supportURL   https://github.com/AhmedYasinKurt/cift-altyazi/issues
+// @downloadURL  https://raw.githubusercontent.com/AhmedYasinKurt/cift-altyazi/main/cift-altyazi.user.js
+// @updateURL    https://raw.githubusercontent.com/AhmedYasinKurt/cift-altyazi/main/cift-altyazi.user.js
 // ==/UserScript==
 
 (function () {
