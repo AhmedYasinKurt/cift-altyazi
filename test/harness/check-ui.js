@@ -25,8 +25,7 @@ async (page) => {
 
   // Konuşma başlayana kadar ilerlet (TED: ilk satır 12.6 sn).
   await p.evaluate(() => { const v = document.querySelector('#movie_player video'); v.muted = true; const mp = document.getElementById('movie_player'); mp.seekTo(15.6, true); mp.playVideo(); });
-  await p.waitForTimeout(1500);
-  let s = await state();
+  let s = await until((x) => x.en.length > 3, 6000);
   check('İngilizce satır görünüyor', /government major|papers/.test(s.en), JSON.stringify(s.en));
   check('YouTube kendi altyazısı gizli', s.nativeHidden);
   check('Gerektiğinde modunda Türkçe yok', s.tr === '', s.tr);

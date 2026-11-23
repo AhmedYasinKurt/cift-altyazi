@@ -162,6 +162,7 @@
 
     function onTimedtext(url, text) {
       const info = parseTimedtextUrl(url);
+      post('seen', { videoId: info.videoId, lang: info.lang, kind: info.kind, status: (info.tlang ? 'tlang ' : '') + 'len=' + (text ? text.length : 0) });
       if (!info.videoId || info.tlang) return; // çevrilmiş izleri yok say
       if (typeof text !== 'string' || text.trim()[0] !== '{') return; // boş ya da engel sayfası
       if (!captured.has(info.videoId)) captured.set(info.videoId, new Map());
@@ -231,22 +232,45 @@
 
       const have = captured.get(vid);
       if (have && have.has(src.languageCode + '|' + src.kind)) return report('ok', { lang: src.languageCode, kind: src.kind });
+      // Birkaç denemeden sonra aynı dilde başka bir iz (ör. otomatik) yakalandıysa onu kullan.
+      if (have && state.attempts >= 2) {
+        const base = src.languageCode.split('-')[0];
+        for (const key of have.keys()) {
+          const [l, k] = key.split('|');
+          if (l.split('-')[0] === base) return report('ok', { lang: l, kind: k });
+        }
+      }
 
       // Video hiç oynatılmadıysa oynatıcı altyazıyı indirmez; deneme harcama, bekle.
       const v = mp.querySelector('video');
       if (!v || (v.paused && v.currentTime === 0)) return;
 
       const now = Date.now();
-      if (state.attempts >= 3 && now - state.last > 20000) state.attempts = 2; // vazgeçme: yavaşça yeniden dene
-      if (state.attempts < 3 && now - state.last > 4000) {
+      if (state.attempts >= 3 && now - state.last > 20000) state.attempts = 1; // vazgeçme: yavaşça yeniden dene
+      if (state.attempts < 3 && now - state.last > 3000) {
         state.attempts++;
         state.last = now;
         report('loading');
-        try {
-          if (typeof mp.loadModule === 'function') mp.loadModule('captions');
-          const track = { languageCode: src.languageCode };
-          if (src.kind) track.kind = src.kind;
+        // Oynatıcının kendi iz listesindeki tam nesneyi ver; yalnız dil kodu verilirse
+        // masaüstü oynatıcı otomatik (ASR) izi seçebiliyor.
+        const setTrack = () => {
+          let list = [];
+          try { list = mp.getOption('captions', 'tracklist') || []; } catch (e) { /* yok say */ }
+          const exact = list.find((t) => t && t.languageCode === src.languageCode && (t.kind || '') === src.kind);
+          const track = exact || (src.kind ? { languageCode: src.languageCode, kind: src.kind } : { languageCode: src.languageCode });
           mp.setOption('captions', 'track', track);
+        };
+        // İki yöntemi sırayla dene: mobil oynatıcı basit iz seçimiyle, masaüstü oynatıcı
+        // (iz zaten seçiliyse) ancak altyazı modülü kapatılıp açılınca yeniden indiriyor.
+        try {
+          if (state.attempts % 2 === 0 && typeof mp.unloadModule === 'function') {
+            mp.unloadModule('captions');
+            mp.loadModule('captions');
+            setTimeout(() => { try { setTrack(); } catch (e) { /* yok say */ } }, 1500);
+          } else {
+            if (typeof mp.loadModule === 'function') mp.loadModule('captions');
+            setTrack();
+          }
         } catch (e) { /* bir sonraki denemede */ }
       } else if (state.attempts >= 3 && now - state.last > 6000) {
         report('fail');
@@ -667,7 +691,7 @@
 
   const CSS_TEXT = `
 #ca-root{position:absolute;inset:0;pointer-events:none;z-index:60;font-family:Roboto,Arial,sans-serif}
-#ca-box{position:absolute;left:50%;bottom:13%;transform:translateX(-50%);width:max-content;max-width:86%;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+#ca-box{position:absolute;left:50%;bottom:16%;transform:translateX(-50%);width:max-content;max-width:86%;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
 .ca-line{background:rgba(8,8,8,.78);color:#fff;padding:2px 10px;border-radius:6px;line-height:1.35;white-space:pre-wrap}
 .ca-line[hidden]{display:none}
 .ca-tr{color:#ffd54a}

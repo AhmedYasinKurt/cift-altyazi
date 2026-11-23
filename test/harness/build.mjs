@@ -11,6 +11,10 @@ const root = path.resolve(here, '..', '..');
 const userscript = fs.readFileSync(path.join(root, 'cift-altyazi.user.js'), 'utf8');
 const args = process.argv.slice(2);
 const mock = args.includes('--mock');
+const desktop = args.includes('--desktop');
+const UA = desktop
+  ? 'Mozilla/5.0 (X11; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0'
+  : 'Mozilla/5.0 (Android 14; Tablet; rv:145.0) Gecko/145.0 Firefox/145.0';
 const pos = args.filter((a) => !a.startsWith('--'));
 const videoId = pos[0] || 'arj7oStGLkU';
 const host = pos[1] || 'm.youtube.com';
@@ -59,8 +63,8 @@ const setup = `async (page) => {
   const browser = page.context().browser();
   for (const c of browser.contexts()) if (c !== page.context()) await c.close();
   const ctx = await browser.newContext({
-    userAgent: 'Mozilla/5.0 (Android 14; Tablet; rv:145.0) Gecko/145.0 Firefox/145.0',
-    viewport: { width: 1280, height: 800 }, isMobile: true, hasTouch: true, locale: 'en-US',
+    userAgent: ${JSON.stringify(UA)},
+    viewport: { width: 1280, height: 800 }, isMobile: ${!desktop}, hasTouch: true, locale: 'en-US',
   });
   await ctx.addInitScript({ path: ${JSON.stringify(injectedPath)} });
   ${mock ? `const fx = ${JSON.stringify(fixturePaths)};
@@ -79,7 +83,7 @@ const setup = `async (page) => {
   p.on('pageerror', (e) => errors.push('pageerror: ' + String(e).slice(0, 300)));
   await p.goto('https://${host}/watch?v=${videoId}', { waitUntil: 'domcontentloaded', timeout: 45000 });
   await p.waitForTimeout(5000);
-  await p.mouse.click(390, 268);
+  await p.evaluate(() => { const v = document.querySelector('#movie_player video'); if (v) v.muted = true; const mp = document.getElementById('movie_player'); if (mp && mp.playVideo) mp.playVideo(); });
   await p.waitForTimeout(7000);
   const dbg = await p.evaluate(() => (window.__ciftAltyaziDebug || { events: [] }).events);
   await p.screenshot({ path: ${JSON.stringify(path.join(here, 'out', 'setup.png').replace(/\\/g, '/'))} });
@@ -89,4 +93,4 @@ const setup = `async (page) => {
 fs.mkdirSync(path.join(here, 'out'), { recursive: true });
 fs.writeFileSync(path.join(here, 'out', 'setup.js'), setup);
 fs.writeFileSync(injectedPath, injected);
-console.log('yazıldı: test/harness/out/setup.js (' + videoId + ' @ ' + host + (mock ? ', mock' : '') + ')');
+console.log('yazıldı: test/harness/out/setup.js (' + videoId + ' @ ' + host + (mock ? ', mock' : '') + (desktop ? ', masaüstü' : '') + ')');
