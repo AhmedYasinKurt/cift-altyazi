@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Çift Altyazı
 // @namespace    cift-altyazi
-// @version      0.2.0
+// @version      0.2.1
 // @description  YouTube'da İngilizce altyazı + Türkçe çeviri (sürekli ya da TR tuşuyla gerektiğinde)
 // @match        *://*.youtube.com/*
 // @inject-into  content
@@ -34,7 +34,7 @@
     sizePct: { min: 60, max: 200, step: 10 },
     bgPct: { min: 0, max: 100, step: 10 },
   });
-  const VERSION = '0.2.0'; // @version ile aynı tutun
+  const VERSION = '0.2.1'; // @version ile aynı tutun
 
   /** json3 altyazı metnini satırlara çevirir: [{ start, end, text }] (ms). */
   function parseJson3(text) {
@@ -678,11 +678,11 @@
     }
 
     function showNote(text) {
-      pendingNote = text;
-      if (!ensureUi()) return;
+      // Oynatıcı henüz yoksa notu sakla; ensureUi oynatıcı gelince gösterir.
+      // (Not: pendingNote'u ensureUi'den ÖNCE ayarlamak sonsuz döngüye yol açıyordu.)
+      if (!ensureUi()) { pendingNote = text; return; }
       ui.note.textContent = text;
       ui.note.hidden = false;
-      pendingNote = '';
       clearTimeout(noteTimer);
       noteTimer = setTimeout(() => { if (ui) ui.note.hidden = true; }, 6000);
     }
@@ -706,7 +706,7 @@
       const pc = mp.closest('#player-container-id');
       const host = pc || mp;
       if (ui.root.parentNode !== host) host.appendChild(ui.root);
-      if (pendingNote) showNote(pendingNote);
+      if (pendingNote) { const n = pendingNote; pendingNote = ''; showNote(n); }
       return true;
     }
 
