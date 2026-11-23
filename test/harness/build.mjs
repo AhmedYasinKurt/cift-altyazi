@@ -12,8 +12,10 @@ const userscript = fs.readFileSync(path.join(root, 'cift-altyazi.user.js'), 'utf
 const args = process.argv.slice(2);
 const mock = args.includes('--mock');
 const desktop = args.includes('--desktop');
-// --mock-tr: Google çevirisi yerine sahte çeviri ("[TR] satır"), IP engeli varken bağlantıyı test etmek için.
-const mockTr = args.includes('--mock-tr');
+// Çeviri testlerde VARSAYILAN olarak sahtedir ("[TR] satır"). Ücretsiz Google adresi fazla istekte
+// evin internet adresini engelliyor ve tablet de aynı adresi kullanıyor. Gerçek çeviri yalnızca
+// --real-tr ile, tek seferlik kontrol için kullanılmalı.
+const mockTr = !args.includes('--real-tr');
 const UA = desktop
   ? 'Mozilla/5.0 (X11; Linux x86_64; rv:145.0) Gecko/20100101 Firefox/145.0'
   : 'Mozilla/5.0 (Android 14; Tablet; rv:145.0) Gecko/145.0 Firefox/145.0';
