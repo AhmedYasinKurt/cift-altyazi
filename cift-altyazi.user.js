@@ -144,4 +144,209 @@
     module.exports = CA;
     return;
   }
+
+  // ---------------------------------------------------------------------------
+  // Sayfa parçası: YouTube sayfasının kendi içinde çalışır (metin olarak eklenir).
+  // Oynatıcının altyazı cevabını yakalar ve doğru altyazı izini yükletir.
+  // Dışarıdaki hiçbir değişkene dokunmamalı: yalnızca parametrelerini kullanır.
+  // ---------------------------------------------------------------------------
+
+  function pagePart(token, chooseSourceTrack, parseTimedtextUrl) {
+    const post = (type, data) => window.postMessage(Object.assign({ src: 'cift-altyazi', dir: 'page', token, type }, data), '*');
+    if (window.__ciftAltyaziPage) { post('ready', {}); return; }
+    window.__ciftAltyaziPage = true;
+
+    const captured = new Map(); // videoId -> Map("lang|kind" -> metin)
+    const isTimedtext = (u) => /\/api\/timedtext/.test(String(u || ''));
+
+    function onTimedtext(url, text) {
+      const info = parseTimedtextUrl(url);
+      if (!info.videoId || info.tlang) return; // çevrilmiş izleri yok say
+      if (typeof text !== 'string' || text.trim()[0] !== '{') return; // boş ya da engel sayfası
+      if (!captured.has(info.videoId)) captured.set(info.videoId, new Map());
+      captured.get(info.videoId).set(info.lang + '|' + info.kind, text);
+      post('captions', { videoId: info.videoId, lang: info.lang, kind: info.kind, text });
+    }
+
+    const XHR = window.XMLHttpRequest.prototype;
+    const origOpen = XHR.open;
+    const origSend = XHR.send;
+    XHR.open = function (method, url) {
+      try { this.__caUrl = String(url); } catch (e) { /* yok say */ }
+      return origOpen.apply(this, arguments);
+    };
+    XHR.send = function () {
+      if (isTimedtext(this.__caUrl)) {
+        const xhr = this;
+        xhr.addEventListener('load', function () {
+          try {
+            let text = '';
+            if (xhr.responseType === '' || xhr.responseType === 'text') text = xhr.responseText;
+            else if (xhr.responseType === 'json') text = JSON.stringify(xhr.response);
+            else if (xhr.responseType === 'arraybuffer' && xhr.response) text = new TextDecoder().decode(xhr.response);
+            onTimedtext(xhr.responseURL || xhr.__caUrl, text);
+          } catch (e) { /* yok say */ }
+        });
+      }
+      return origSend.apply(this, arguments);
+    };
+
+    const origFetch = window.fetch;
+    window.fetch = function (input) {
+      const p = origFetch.apply(this, arguments);
+      try {
+        const url = typeof input === 'string' ? input : input && input.url;
+        if (isTimedtext(url)) {
+          p.then((res) => res.clone().text().then((t) => onTimedtext(res.url || url, t))).catch(() => {});
+        }
+      } catch (e) { /* yok say */ }
+      return p;
+    };
+
+    // Video değişimini izle, doğru altyazı izini yükle.
+    let state = { vid: '', attempts: 0, last: 0, status: '' };
+    const report = (status, extra) => {
+      if (state.status === status) return;
+      state.status = status;
+      post('video', Object.assign({ videoId: state.vid, status }, extra || {}));
+    };
+
+    function tick() {
+      const mp = document.getElementById('movie_player');
+      if (!mp || typeof mp.getVideoData !== 'function') return;
+      let vid = '';
+      try { vid = (mp.getVideoData() || {}).video_id || ''; } catch (e) { return; }
+      if (!vid) return;
+      if (vid !== state.vid) state = { vid, attempts: 0, last: 0, status: '' };
+
+      let pr = null;
+      try { pr = mp.getPlayerResponse && mp.getPlayerResponse(); } catch (e) { /* yok say */ }
+      if (!pr || !pr.videoDetails || pr.videoDetails.videoId !== vid) return; // yeni video henüz hazır değil
+      const tracks = pr.captions && pr.captions.playerCaptionsTracklistRenderer &&
+        pr.captions.playerCaptionsTracklistRenderer.captionTracks;
+      const src = chooseSourceTrack(tracks);
+      if (!src) return report('none');
+      if (src.turkish) return report('turkish');
+
+      const have = captured.get(vid);
+      if (have && have.has(src.languageCode + '|' + src.kind)) return report('ok', { lang: src.languageCode, kind: src.kind });
+
+      const now = Date.now();
+      if (state.attempts < 3 && now - state.last > 4000) {
+        state.attempts++;
+        state.last = now;
+        report('loading');
+        try {
+          if (typeof mp.loadModule === 'function') mp.loadModule('captions');
+          const track = { languageCode: src.languageCode };
+          if (src.kind) track.kind = src.kind;
+          mp.setOption('captions', 'track', track);
+        } catch (e) { /* bir sonraki denemede */ }
+      } else if (state.attempts >= 3 && now - state.last > 6000) {
+        report('fail');
+      }
+    }
+    setInterval(tick, 1000);
+
+    window.addEventListener('message', (e) => {
+      const d = e.data;
+      if (!d || d.src !== 'cift-altyazi' || d.dir !== 'content' || d.token !== token) return;
+      if (d.type === 'resend') {
+        const have = captured.get(state.vid);
+        if (have) for (const [key, text] of have) {
+          const [lang, kind] = key.split('|');
+          post('captions', { videoId: state.vid, lang, kind, text });
+        }
+        state.status = '';
+      } else if (d.type === 'retry') {
+        state.attempts = 0;
+        state.last = 0;
+        state.status = '';
+      }
+    });
+
+    post('ready', {});
+  }
+
+  /** Sayfa parçasını YouTube'un nonce değeri ve Trusted Types ile sayfaya ekler. */
+  function injectPagePart(token) {
+    const code = '(' + pagePart.toString() + ')(' + JSON.stringify(token) + ', ' +
+      '(function(){ const baseLang = ' + baseLang.toString() + '; return ' + chooseSourceTrack.toString() + '; })(), ' +
+      parseTimedtextUrl.toString() + ');';
+    let policy = null;
+    let done = false;
+
+    function tryInject(force) {
+      if (done) return true;
+      const nonceEl = document.querySelector('script[nonce]');
+      const nonce = nonceEl && (nonceEl.nonce || nonceEl.getAttribute('nonce'));
+      if (!nonce && !force) return false;
+      const s = document.createElement('script');
+      if (nonce) s.nonce = nonce;
+      let content = code;
+      try {
+        const tt = window.trustedTypes;
+        if (tt && typeof tt.createPolicy === 'function') {
+          policy = policy || tt.createPolicy('cift-altyazi', { createScript: (x) => x });
+          content = policy.createScript(code);
+        }
+      } catch (e) { /* Trusted Types yoksa düz metin */ }
+      try {
+        s.textContent = content;
+        (document.head || document.documentElement).appendChild(s);
+        s.remove();
+      } catch (e) { return false; }
+      done = true;
+      return true;
+    }
+
+    if (tryInject(false)) return;
+    const mo = new MutationObserver(() => { if (tryInject(false)) mo.disconnect(); });
+    mo.observe(document, { childList: true, subtree: true });
+    document.addEventListener('DOMContentLoaded', () => { mo.disconnect(); tryInject(true); }, { once: true });
+  }
+
+  /** Son çare (Firefox): sayfanın kendi eval'i ile ekle. */
+  function injectViaEval(token) {
+    try {
+      const w = window.wrappedJSObject;
+      if (!w || typeof w.eval !== 'function') return false;
+      const code = '(' + pagePart.toString() + ')(' + JSON.stringify(token) + ', ' +
+        '(function(){ const baseLang = ' + baseLang.toString() + '; return ' + chooseSourceTrack.toString() + '; })(), ' +
+        parseTimedtextUrl.toString() + ');';
+      w.eval(code);
+      return true;
+    } catch (e) { return false; }
+  }
+
+  main();
+
+  function main() {
+    const token = Math.random().toString(36).slice(2) + Date.now().toString(36);
+    const bridge = { ready: false, onCaptions: null, onVideo: null };
+    const debug = (window.__ciftAltyaziDebug = { events: [] });
+
+    window.addEventListener('message', (e) => {
+      const d = e.data;
+      if (!d || d.src !== 'cift-altyazi' || d.dir !== 'page' || d.token !== token) return;
+      debug.events.push({ type: d.type, videoId: d.videoId, lang: d.lang, kind: d.kind, status: d.status, len: d.text ? d.text.length : 0 });
+      if (d.type === 'ready') {
+        bridge.ready = true;
+        sendToPage('resend');
+      } else if (d.type === 'captions' && bridge.onCaptions) bridge.onCaptions(d);
+      else if (d.type === 'video' && bridge.onVideo) bridge.onVideo(d);
+    });
+
+    function sendToPage(type) {
+      window.postMessage({ src: 'cift-altyazi', dir: 'content', token, type }, '*');
+    }
+
+    injectPagePart(token);
+    setTimeout(() => {
+      if (!bridge.ready && injectViaEval(token)) debug.events.push({ type: 'eval-fallback' });
+    }, 6000);
+
+    window.__ciftAltyaziBridge = bridge;
+    bridge.send = sendToPage;
+  }
 })();
