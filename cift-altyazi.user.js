@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Çift Altyazı
 // @namespace    cift-altyazi
-// @version      0.1.0
+// @version      0.2.0
 // @description  YouTube'da İngilizce altyazı + Türkçe çeviri (sürekli ya da TR tuşuyla gerektiğinde)
 // @match        *://*.youtube.com/*
 // @inject-into  content
@@ -28,8 +28,13 @@
   // ---------------------------------------------------------------------------
 
   const SENTENCE_END = /[.?!…。！？]["'”’)\]]*$/;
-  const DEFAULT_SETTINGS = Object.freeze({ showOriginal: true, trMode: 'onDemand' });
-  const VERSION = '0.1.0'; // @version ile aynı tutun
+  const DEFAULT_SETTINGS = Object.freeze({ showOriginal: true, trMode: 'onDemand', sizePct: 100, bgPct: 80 });
+  // Sayısal ayarların sınırları: altyazı boyutu (%) ve arka plan kutusu koyuluğu (%).
+  const RANGES = Object.freeze({
+    sizePct: { min: 60, max: 200, step: 10 },
+    bgPct: { min: 0, max: 100, step: 10 },
+  });
+  const VERSION = '0.2.0'; // @version ile aynı tutun
 
   /** json3 altyazı metnini satırlara çevirir: [{ start, end, text }] (ms). */
   function parseJson3(text) {
@@ -138,12 +143,28 @@
     return {
       showOriginal: typeof r.showOriginal === 'boolean' ? r.showOriginal : DEFAULT_SETTINGS.showOriginal,
       trMode: r.trMode === 'always' || r.trMode === 'onDemand' ? r.trMode : DEFAULT_SETTINGS.trMode,
+      sizePct: clampStep('sizePct', r.sizePct),
+      bgPct: clampStep('bgPct', r.bgPct),
     };
+  }
+
+  /** Sayıyı sınırlar içine alır ve adıma yuvarlar; sayı değilse varsayılan. */
+  function clampStep(key, value) {
+    const { min, max, step } = RANGES[key];
+    if (typeof value !== 'number' || !isFinite(value)) return DEFAULT_SETTINGS[key];
+    const v = Math.round(value / step) * step;
+    return Math.min(max, Math.max(min, v));
+  }
+
+  /** −/+ düğmesi: bir adım azalt/artır (sınırda durur). */
+  function stepSetting(key, value, dir) {
+    return clampStep(key, value + dir * RANGES[key].step);
   }
 
   const CA = {
     parseJson3, findLastCueIndex, findActiveCueIndex, sentenceRange, chunkLines,
     parseTranslateResponse, splitTranslated, chooseSourceTrack, parseTimedtextUrl, normalizeSettings,
+    stepSetting,
   };
 
   if (typeof module === 'object' && module && module.exports) {
@@ -577,7 +598,29 @@
       ctrl.append(trBtn, gearBtn);
 
       const panel = shield(el('div')); panel.id = 'ca-panel'; panel.hidden = true;
-      panel.append(el('h3', '', 'Çift Altyazı ayarları'));
+      const head = el('div', 'ca-head');
+      const close = onTap(el('button', 'ca-close', '✕'), togglePanel);
+      close.title = 'Kapat';
+      close.setAttribute('aria-label', 'Kapat');
+      head.append(el('h3', '', 'Çift Altyazı ayarları'), close);
+      panel.append(head);
+      const mkStepper = (label, key) => {
+        const row = el('div', 'ca-row');
+        row.append(el('div', 'ca-row-label', label));
+        const seg = el('div', 'ca-seg ca-step');
+        const minus = onTap(el('button', 'ca-opt ca-minus', '−'), () => saveSettings({ [key]: stepSetting(key, settings[key], -1) }));
+        const val = el('span', 'ca-val');
+        const plus = onTap(el('button', 'ca-opt ca-plus', '+'), () => saveSettings({ [key]: stepSetting(key, settings[key], +1) }));
+        minus.dataset.key = key; plus.dataset.key = key; val.dataset.key = key;
+        seg.append(minus, val, plus);
+        row.append(seg);
+        panel.append(row);
+        return () => {
+          val.textContent = '%' + settings[key];
+          minus.disabled = settings[key] <= RANGES[key].min;
+          plus.disabled = settings[key] >= RANGES[key].max;
+        };
+      };
       const mkRow = (label, options, getVal, setVal) => {
         const row = el('div', 'ca-row');
         row.append(el('div', 'ca-row-label', label));
@@ -596,13 +639,14 @@
         () => settings.showOriginal, (v) => saveSettings({ showOriginal: v }));
       const upd2 = mkRow('Türkçe çeviri', [['always', 'Sürekli göster'], ['onDemand', 'Gerektiğinde göster']],
         () => settings.trMode, (v) => saveSettings({ trMode: v }));
-      const close = onTap(el('button', 'ca-close', 'Kapat'), togglePanel);
+      const upd3 = mkStepper('Altyazı boyutu', 'sizePct');
+      const upd4 = mkStepper('Arka plan koyuluğu', 'bgPct');
       const diag = el('div', 'ca-diag');
-      panel.append(close, diag);
+      panel.append(diag);
 
       const note = el('div'); note.id = 'ca-note'; note.hidden = true;
       root.append(box, ctrl, panel, note);
-      return { root, box, lineEn, lineTr, ctrl, trBtn, gearBtn, panel, note, diag, updRows: () => { upd1(); upd2(); } };
+      return { root, box, lineEn, lineTr, ctrl, trBtn, gearBtn, panel, note, diag, updRows: () => { upd1(); upd2(); upd3(); upd4(); } };
     }
 
     /** Sorun giderme için kısa durum satırı (ayarlar panelinin altında). */
@@ -685,11 +729,25 @@
           if (settings.trMode === 'always' && cur.tr && typeof cur.tr[i] === 'string') tr = cur.tr[i];
         }
       }
-      const fs = Math.round(Math.max(14, Math.min(34, (mp.clientHeight || 400) * 0.045)));
-      const sig = [en, tr, fs, settings.trMode, hasCues, od.open].join('\u0001');
+      // Ayarlar açıkken ve o an konuşma yoksa örnek satır göster: boyut/koyuluk hemen görülsün.
+      const panelOpen = !ui.panel.hidden;
+      if (panelOpen && !en && !tr) {
+        if (settings.showOriginal) en = 'This is how the subtitles will look.';
+        tr = 'Altyazılar böyle görünecek.';
+      }
+      const base = Math.max(14, Math.min(34, (mp.clientHeight || 400) * 0.045));
+      const fs = Math.max(10, Math.round(base * settings.sizePct / 100));
+      const sig = [en, tr, fs, settings.bgPct, settings.trMode, hasCues, od.open, panelOpen].join('\u0001');
       if (!force && sig === lastSig) return;
       lastSig = sig;
       ui.box.style.fontSize = fs + 'px';
+      const bg = 'rgba(8,8,8,' + (settings.bgPct / 100) + ')';
+      // Kutu çok saydamsa yazıya gölge ekle ki video üstünde okunabilsin.
+      const shadow = settings.bgPct < 40 ? '0 0 3px #000, 0 0 2px #000, 1px 1px 2px #000' : 'none';
+      for (const line of [ui.lineEn, ui.lineTr]) {
+        line.style.background = bg;
+        line.style.textShadow = shadow;
+      }
       ui.lineEn.textContent = en;
       ui.lineEn.hidden = !en;
       ui.lineTr.textContent = tr;
@@ -729,16 +787,20 @@
 .ca-btn[hidden]{display:none}
 .ca-btn.ca-gear{font-size:22px}
 .ca-btn.ca-on{background:#ffd54a;color:#111;border-color:#ffd54a;opacity:1}
-#ca-panel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(20,20,20,.96);color:#fff;border-radius:12px;padding:16px 18px;pointer-events:auto;width:min(420px,90%);box-sizing:border-box;font-size:16px;box-shadow:0 4px 24px rgba(0,0,0,.5);z-index:2}
+#ca-panel{position:absolute;left:50%;top:8px;transform:translateX(-50%);background:rgba(20,20,20,.96);color:#fff;border-radius:12px;padding:8px 12px;pointer-events:auto;width:min(560px,94%);max-height:calc(64% - 8px);overflow-y:auto;box-sizing:border-box;font-size:14px;box-shadow:0 4px 24px rgba(0,0,0,.5);z-index:2}
 #ca-panel[hidden]{display:none}
-#ca-panel h3{margin:0 0 10px;font-size:18px;font-weight:700}
-.ca-row{margin:12px 0}
-.ca-row-label{margin-bottom:6px;color:#ddd}
-.ca-seg{display:flex;gap:8px}
-.ca-opt{flex:1;min-height:44px;padding:8px 10px;border-radius:8px;border:1px solid #666;background:#333;color:#fff;font-size:15px;cursor:pointer}
+.ca-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#ca-panel h3{margin:0;font-size:16px;font-weight:700}
+.ca-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:5px 0}
+.ca-row-label{color:#ddd;flex:1 1 120px;min-width:0}
+.ca-seg{display:flex;gap:8px;flex:0 1 auto}
+.ca-opt{min-height:38px;padding:4px 12px;border-radius:8px;border:1px solid #666;background:#333;color:#fff;font-size:14px;cursor:pointer}
 .ca-opt.ca-sel{background:#ffd54a;color:#111;border-color:#ffd54a;font-weight:700}
-.ca-close{margin-top:8px;width:100%;min-height:44px;border-radius:8px;border:0;background:#555;color:#fff;font-size:16px;cursor:pointer}
-.ca-diag{margin-top:10px;font-size:12px;color:#aaa;line-height:1.4}
+.ca-opt:disabled{opacity:.35;cursor:default}
+.ca-step .ca-opt{width:42px;padding:0;font-size:22px;font-weight:700}
+.ca-val{min-width:52px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.ca-close{width:36px;height:36px;flex:0 0 auto;border-radius:50%;border:0;background:#555;color:#fff;font-size:18px;cursor:pointer;padding:0}
+.ca-diag{margin-top:4px;font-size:11px;color:#aaa;line-height:1.4}
 #ca-note{position:absolute;left:10px;top:10px;max-width:70%;background:rgba(0,0,0,.8);color:#fff;padding:6px 10px;border-radius:6px;font-size:14px;line-height:1.4}
 #ca-note[hidden]{display:none}
 html.ca-active .ytp-caption-window-container,html.ca-active #ytp-caption-window-container{display:none!important}

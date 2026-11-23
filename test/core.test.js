@@ -106,9 +106,34 @@ test('parseTimedtextUrl', () => {
 });
 
 test('normalizeSettings', () => {
-  assert.deepEqual(CA.normalizeSettings(undefined), { showOriginal: true, trMode: 'onDemand' });
-  assert.deepEqual(CA.normalizeSettings({ trMode: 'x', showOriginal: 'evet' }), { showOriginal: true, trMode: 'onDemand' });
-  assert.deepEqual(CA.normalizeSettings({ trMode: 'always', showOriginal: false }), { showOriginal: false, trMode: 'always' });
+  const D = { showOriginal: true, trMode: 'onDemand', sizePct: 100, bgPct: 80 };
+  assert.deepEqual(CA.normalizeSettings(undefined), D);
+  assert.deepEqual(CA.normalizeSettings({ trMode: 'x', showOriginal: 'evet' }), D);
+  assert.deepEqual(CA.normalizeSettings({ trMode: 'always', showOriginal: false }), { ...D, showOriginal: false, trMode: 'always' });
+  // 0.1.0'dan kalma kayıt (boyut/opaklık yok) → varsayılanlarla tamamlanır
+  assert.deepEqual(CA.normalizeSettings({ showOriginal: false, trMode: 'always' }).sizePct, 100);
+});
+
+test('normalizeSettings: boyut ve arka plan sınırları ve adımları', () => {
+  const n = (o) => CA.normalizeSettings(o);
+  assert.equal(n({ sizePct: 150 }).sizePct, 150);
+  assert.equal(n({ sizePct: 10 }).sizePct, 60);
+  assert.equal(n({ sizePct: 500 }).sizePct, 200);
+  assert.equal(n({ sizePct: 134 }).sizePct, 130);
+  assert.equal(n({ sizePct: 'büyük' }).sizePct, 100);
+  assert.equal(n({ bgPct: 0 }).bgPct, 0);
+  assert.equal(n({ bgPct: 100 }).bgPct, 100);
+  assert.equal(n({ bgPct: -20 }).bgPct, 0);
+  assert.equal(n({ bgPct: 47 }).bgPct, 50);
+  assert.equal(n({ bgPct: null }).bgPct, 80);
+});
+
+test('stepSetting: −/+ düğmeleri sınırda durur', () => {
+  assert.equal(CA.stepSetting('sizePct', 100, +1), 110);
+  assert.equal(CA.stepSetting('sizePct', 200, +1), 200);
+  assert.equal(CA.stepSetting('sizePct', 60, -1), 60);
+  assert.equal(CA.stepSetting('bgPct', 0, -1), 0);
+  assert.equal(CA.stepSetting('bgPct', 80, +1), 90);
 });
 
 test('@version ile VERSION aynı', () => {

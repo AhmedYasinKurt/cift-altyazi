@@ -74,9 +74,13 @@ Kurulum bitti! 🎉
 | --- | --- | --- |
 | **İngilizce (orijinal) altyazı** | Açık / Kapalı | Videoda zaten yazı varsa ya da İngilizceye ihtiyacın yoksa **Kapalı** yap. |
 | **Türkçe çeviri** | Sürekli göster / Gerektiğinde göster | **Sürekli**: her cümlenin altında Türkçesi hep görünür. **Gerektiğinde**: sadece TR tuşuna basınca çıkar. |
+| **Altyazı boyutu** | `−` / `+` (%60 – %200) | Yazıyı küçültür / büyütür. Hem İngilizce hem Türkçe satıra uygulanır. |
+| **Arka plan koyuluğu** | `−` / `+` (%0 – %100) | Yazının arkasındaki siyah kutunun koyuluğu. **%0** = kutu yok (yazıya gölge eklenir, video daha çok görünür); **%100** = tam siyah. |
+
+Panel açıkken o an konuşma yoksa video üzerinde **örnek bir satır** görünür; boyutu ve koyuluğu değiştirirken sonucu hemen görürsün.
 
 Seçimlerin kaydedilir. Tableti kapatıp açsan da aynı kalır.
-İlk ayar: İngilizce **Açık**, Türkçe **Gerektiğinde göster**.
+İlk ayar: İngilizce **Açık**, Türkçe **Gerektiğinde göster**, boyut **%100**, koyuluk **%80**.
 
 **Sürekli göster** modunda:
 
@@ -105,6 +109,7 @@ Bana yazarken bu satırı da söylersen sorunu hemen bulabilirim.
 | "**Çeviri şu an alınamadı**" | Ücretsiz Google çevirisi geçici olarak cevap vermedi (çok fazla istek olunca olabilir). Birkaç dakika sonra tekrar dene. |
 | Altyazı geç geliyor | Videoyu oynatmadan YouTube altyazıyı indirmez. Oynat ve birkaç saniye bekle. |
 | Altyazılar iki kez görünüyor | Sayfayı yenile. |
+| Tuşlara basınca bir şey olmuyor | YouTube "uygulamayı aç" gibi bir pencere açmış olabilir; o pencerede **Şimdi değil** de. |
 
 ### Betik nasıl güncellenir?
 Violentmonkey betiği kendiliğinden günceller (günde bir kez kadar). Hemen güncellemek istersen:

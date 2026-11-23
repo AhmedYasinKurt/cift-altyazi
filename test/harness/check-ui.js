@@ -5,6 +5,13 @@ async (page) => {
   const p = page.context().browser().contexts().flatMap((c) => c.pages()).find((x) => x.url().includes('youtube.com/watch'));
   if (!p) return 'YouTube sayfası yok: önce setup.js çalıştırın';
   const results = [];
+  // YouTube'un "uygulamayı aç" penceresi oynatıcıyı etkisiz bırakır: varsa kapat.
+  await p.evaluate(() => {
+    for (const b of document.querySelectorAll('dialog[open] button, bottom-sheet-container button')) {
+      if (/not now|no thanks|şimdi değil|hayır/i.test(b.textContent || '')) b.click();
+    }
+    document.querySelectorAll('dialog[open]').forEach((d) => d.close());
+  }).catch(() => {});
   const check = (name, ok, info) => results.push((ok ? 'GEÇTİ ' : 'KALDI ') + name + (info ? ' → ' + info : ''));
   const state = () => p.evaluate(() => {
     const v = document.querySelector('#movie_player video');
@@ -73,14 +80,14 @@ async (page) => {
   s = await state();
   check('İngilizce kapalı: İngilizce satır yok', s.en === '', s.en);
   check('İngilizce kapalı: Türkçe hâlâ var', s.tr.length > 3, s.tr);
-  check('Ayarlar kaydedildi', s.settings === '{"showOriginal":false,"trMode":"always"}', s.settings);
+  check('Ayarlar kaydedildi', s.settings === '{"showOriginal":false,"trMode":"always","sizePct":100,"bgPct":80}', s.settings);
   await p.screenshot({ path: OUT + '5-ingilizce-kapali.png' });
 
   // Yenileme sonrası ayar korunuyor mu, varsayılana dön
   await p.reload({ waitUntil: 'domcontentloaded' });
   await p.waitForTimeout(6000);
   const kept = await p.evaluate(() => localStorage.getItem('ca-gm:settings'));
-  check('Yenilemeden sonra ayarlar korunuyor', kept === '{"showOriginal":false,"trMode":"always"}', kept);
+  check('Yenilemeden sonra ayarlar korunuyor', kept === '{"showOriginal":false,"trMode":"always","sizePct":100,"bgPct":80}', kept);
   await p.evaluate(() => localStorage.removeItem('ca-gm:settings'));
 
   // Yenilemeden 10 sn sonra oynat: altyazı yine de gelmeli (vazgeçmemeli).

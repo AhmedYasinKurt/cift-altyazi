@@ -5,6 +5,13 @@ async (page) => {
   const p = page.context().browser().contexts().flatMap((c) => c.pages()).find((x) => x.url().includes('youtube.com/watch'));
   if (!p) return 'YouTube sayfası yok: önce setup.js çalıştırın';
   const results = [];
+  // YouTube'un "uygulamayı aç" penceresi oynatıcıyı etkisiz bırakır: varsa kapat.
+  await p.evaluate(() => {
+    for (const b of document.querySelectorAll('dialog[open] button, bottom-sheet-container button')) {
+      if (/not now|no thanks|şimdi değil|hayır/i.test(b.textContent || '')) b.click();
+    }
+    document.querySelectorAll('dialog[open]').forEach((d) => d.close());
+  }).catch(() => {});
   const check = (name, ok, info) => results.push((ok ? 'GEÇTİ ' : 'KALDI ') + name + (info ? ' → ' + info : ''));
   const state = () => p.evaluate(() => {
     const q = (s) => document.querySelector(s);
