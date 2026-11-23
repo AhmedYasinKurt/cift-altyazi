@@ -25,6 +25,7 @@
 
   const SENTENCE_END = /[.?!…。！？]["'”’)\]]*$/;
   const DEFAULT_SETTINGS = Object.freeze({ showOriginal: true, trMode: 'onDemand' });
+  const VERSION = '0.1.0'; // @version ile aynı tutun
 
   /** json3 altyazı metnini satırlara çevirir: [{ start, end, text }] (ms). */
   function parseJson3(text) {
@@ -592,11 +593,28 @@
       const upd2 = mkRow('Türkçe çeviri', [['always', 'Sürekli göster'], ['onDemand', 'Gerektiğinde göster']],
         () => settings.trMode, (v) => saveSettings({ trMode: v }));
       const close = onTap(el('button', 'ca-close', 'Kapat'), togglePanel);
-      panel.append(close);
+      const diag = el('div', 'ca-diag');
+      panel.append(close, diag);
 
       const note = el('div'); note.id = 'ca-note'; note.hidden = true;
       root.append(box, ctrl, panel, note);
-      return { root, box, lineEn, lineTr, ctrl, trBtn, gearBtn, panel, note, updRows: () => { upd1(); upd2(); } };
+      return { root, box, lineEn, lineTr, ctrl, trBtn, gearBtn, panel, note, diag, updRows: () => { upd1(); upd2(); } };
+    }
+
+    /** Sorun giderme için kısa durum satırı (ayarlar panelinin altında). */
+    function diagText() {
+      const parts = [];
+      parts.push('Bağlantı: ' + (bridgeReady ? 'tamam' : 'YOK'));
+      const statusTr = { ok: 'yüklendi', loading: 'yükleniyor', fail: 'yüklenemedi', none: 'videoda yok', turkish: 'video Türkçe' };
+      parts.push('Altyazı: ' + (cur.cues.length ? cur.cues.length + ' satır (' + cur.lang + ')' : (statusTr[cur.status] || 'bekleniyor')));
+      if (settings.trMode === 'always' && cur.cues.length) {
+        const done = cur.tr ? cur.tr.filter((x) => typeof x === 'string').length : 0;
+        parts.push('Çeviri: ' + done + '/' + cur.cues.length);
+      }
+      const seen = debug.events.filter((e) => e.type === 'seen').length;
+      parts.push('İstek: ' + seen);
+      parts.push('Sürüm: ' + VERSION);
+      return parts.join(' · ');
     }
 
     function togglePanel() {
@@ -605,7 +623,11 @@
       ui.panel.hidden = !ui.panel.hidden;
       updatePanel();
     }
-    function updatePanel() { if (ui) ui.updRows(); }
+    function updatePanel() {
+      if (!ui) return;
+      ui.updRows();
+      ui.diag.textContent = diagText();
+    }
 
     function showNote(text) {
       pendingNote = text;
@@ -676,7 +698,10 @@
     document.addEventListener('play', (e) => { if (od.open && e.target === getVideo()) closeOnDemand(false); }, true);
     document.addEventListener('seeking', (e) => { if (od.open && e.target === getVideo()) closeOnDemand(false); }, true);
 
-    setInterval(() => render(false), 150);
+    setInterval(() => {
+      render(false);
+      if (ui && !ui.panel.hidden) ui.diag.textContent = diagText();
+    }, 150);
 
     GM_registerMenuCommand('Çift Altyazı ayarları', () => { ensureUi(); if (ui && ui.panel.hidden) togglePanel(); });
 
@@ -709,6 +734,7 @@
 .ca-opt{flex:1;min-height:44px;padding:8px 10px;border-radius:8px;border:1px solid #666;background:#333;color:#fff;font-size:15px;cursor:pointer}
 .ca-opt.ca-sel{background:#ffd54a;color:#111;border-color:#ffd54a;font-weight:700}
 .ca-close{margin-top:8px;width:100%;min-height:44px;border-radius:8px;border:0;background:#555;color:#fff;font-size:16px;cursor:pointer}
+.ca-diag{margin-top:10px;font-size:12px;color:#aaa;line-height:1.4}
 #ca-note{position:absolute;left:10px;top:10px;max-width:70%;background:rgba(0,0,0,.8);color:#fff;padding:6px 10px;border-radius:6px;font-size:14px;line-height:1.4}
 #ca-note[hidden]{display:none}
 html.ca-active .ytp-caption-window-container,html.ca-active #ytp-caption-window-container{display:none!important}

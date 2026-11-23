@@ -110,3 +110,10 @@ test('normalizeSettings', () => {
   assert.deepEqual(CA.normalizeSettings({ trMode: 'x', showOriginal: 'evet' }), { showOriginal: true, trMode: 'onDemand' });
   assert.deepEqual(CA.normalizeSettings({ trMode: 'always', showOriginal: false }), { showOriginal: false, trMode: 'always' });
 });
+
+test('@version ile VERSION aynı', () => {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'cift-altyazi.user.js'), 'utf8');
+  const meta = src.match(/@version\s+(\S+)/)[1];
+  const code = src.match(/const VERSION = '([^']+)'/)[1];
+  assert.equal(code, meta);
+});
